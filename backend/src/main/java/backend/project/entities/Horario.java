@@ -5,20 +5,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "alumnos")
-public class Alumno {
+@Table(name = "horarios")
+public class Horario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Integer ciclo;
-    private String nombre;
-    private String apellido;
-
+    private String dia;
+    private Time horaInicio;
+    private Time horaFin;
 }

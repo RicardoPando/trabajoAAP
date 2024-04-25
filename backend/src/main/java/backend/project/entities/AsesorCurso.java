@@ -12,13 +12,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "alumnos")
-public class Alumno {
+@Table(name = "asesores_cursos")
+public class AsesorCurso {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Integer ciclo;
-    private String nombre;
-    private String apellido;
-
+    private Integer nivelDominio;
+    private Date disponibilidad;
 }

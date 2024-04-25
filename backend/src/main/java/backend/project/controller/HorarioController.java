@@ -1,6 +1,4 @@
 package backend.project.controller;
 
-
-public class AlumnoController {
-
+public class HorarioController {
 }

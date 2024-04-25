@@ -14,5 +14,16 @@ public class BackendApplication {
 		SpringApplication.run(BackendApplication.class, args);
 	}
 
+	@Bean
+	public CommandLineRunner mappingDemo(
+
+	) {
+		return args -> {
+
+
+
+
+		};
+	}
 
 }

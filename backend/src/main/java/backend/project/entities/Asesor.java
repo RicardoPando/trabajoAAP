@@ -5,20 +5,21 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "alumnos")
-public class Alumno {
+@Table(name = "asesores")
+
+
+public class Asesor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Integer ciclo;
     private String nombre;
     private String apellido;
-
+    private Integer tarifa;
+    private String experiencia;
 }
