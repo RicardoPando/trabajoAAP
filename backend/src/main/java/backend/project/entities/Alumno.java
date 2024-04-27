@@ -20,5 +20,5 @@ public class Alumno {
     private Integer ciclo;
     private String nombre;
     private String apellido;
-
+    //clase alumno
 }
