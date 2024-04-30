@@ -22,4 +22,13 @@ public class Asesor {
     private String apellido;
     private Integer tarifa;
     private String experiencia;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "usuario")
+    private Usuario usuario;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "asesor")
+    private List<AsesorCurso> asesorCursos;
+
 }

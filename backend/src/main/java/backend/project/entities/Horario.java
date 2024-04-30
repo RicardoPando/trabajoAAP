@@ -21,4 +21,8 @@ public class Horario {
     private String dia;
     private Time horaInicio;
     private Time horaFin;
+
+    @ManyToOne
+    @JoinColumn(name = "asesor_id")
+    private Asesor asesor;
 }

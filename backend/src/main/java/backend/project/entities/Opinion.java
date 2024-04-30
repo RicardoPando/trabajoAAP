@@ -19,4 +19,8 @@ public class Opinion {
     private Long id;
     private Date fecha;
     private String comentario;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
 }
