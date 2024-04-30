@@ -70,12 +70,10 @@
 		</dependency>
 
 		<!-- Libreria utilitaria para activar Spring Security -->
-		<!--
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-		-->
 
 
 		<!-- Libreria utilitaria para generar y validar JWTs -->

@@ -20,4 +20,7 @@ public class CanalContacto {
     private String email;
     private String linkedin;
     private String url;
+    @JsonIgnore
+    @OneToOne(mappedBy = "asesor")
+    private Asesor asesor;
 }

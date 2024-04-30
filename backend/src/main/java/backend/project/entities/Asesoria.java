@@ -1,4 +1,5 @@
 package backend.project.entities;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,5 +27,14 @@ public class Asesoria {
     private Time horaFin;
     private Integer duracion;
     private Double montoCobrado;
+
+    @ManyToOne
+    @JoinColumn(name = "alumno_id")
+    private Alumno alumno;
+
+    @ManyToOne
+    @JoinColumn(name = "asesor_id")
+    private Asesor asesor;
+
 }
 

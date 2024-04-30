@@ -19,4 +19,12 @@ public class AsesorCurso {
     private Long id;
     private Integer nivelDominio;
     private Date disponibilidad;
+
+    @ManyToOne
+    @JoinColumn(name = "asesor_id")
+    private Asesor asesor;
+
+    @ManyToOne
+    @JoinColumn(name = "curso_id")
+    private Curso curso;
 }

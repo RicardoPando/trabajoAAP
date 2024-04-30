@@ -21,4 +21,8 @@ public class Usuario {
     private String password;
     private Date fechaRegistro;
     private Boolean habilitado;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "alumno")
+    private Alumno alumno;
 }
