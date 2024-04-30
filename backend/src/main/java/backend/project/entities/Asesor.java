@@ -25,7 +25,7 @@ public class Asesor {
 
     @JsonIgnore
     @OneToOne(mappedBy = "usuario")
-    private Usuario usuario;
+    private User user;
 
     @JsonIgnore
     @OneToMany(mappedBy = "asesor")

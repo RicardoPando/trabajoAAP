@@ -1,8 +1,6 @@
 package backend.project.repositories;
-import backend.project.entities.Usuario;
+import backend.project.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
-import java.util.List;
-public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
+public interface UsuarioRepository extends JpaRepository<User, Long> {
 }
