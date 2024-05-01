@@ -23,10 +23,10 @@ public class AsesorCurso {
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "asesor_id")
-    private Asesor asesor;
+    private Asesor asesores;
 
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "curso_id")
-    private Curso curso;
+    private Curso cursos;
 }

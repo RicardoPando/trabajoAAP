@@ -27,11 +27,11 @@ public class Alumno {
     private User user;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "alumno_id")
+    @OneToMany(mappedBy = "alumno")
     private List<AlumnoCurso> alumnosCursos;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "alumno_id")
+    @OneToMany(mappedBy = "alumno")
     private List<Asesoria> asesorias;
 
 

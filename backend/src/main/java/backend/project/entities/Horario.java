@@ -24,7 +24,7 @@ public class Horario {
 
     @ManyToOne
     @JoinColumn(name = "asesores_id", nullable = false)
-    private Asesor asesor;
+    private Asesor asesores;
 
 
 }

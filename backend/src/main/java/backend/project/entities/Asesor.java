@@ -29,16 +29,16 @@ public class Asesor {
     private User user;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "asesor_id")
+    @OneToMany(mappedBy = "asesor")
     private List<AsesorCurso> asesorCursos;
 
-    @OneToMany(mappedBy = "asesor_id", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "asesor", cascade = CascadeType.ALL)
     private List<Horario> horarios;
 
-    @OneToMany(mappedBy = "asesor_id")
+    @OneToMany(mappedBy = "asesor")
     private List<Asesoria> asesorias;
 
-    @OneToOne(mappedBy = "asesor_id")
+    @OneToOne(mappedBy = "asesor")
     @JsonIgnore
     private CanalContacto canalContactos;
 

@@ -28,14 +28,14 @@ public class User {
 
     @JsonIgnore
     @OneToOne(mappedBy = "user_id")
-    private Asesor asesor;
+    private Asesor asesores;
 
     @JsonIgnore
     @OneToOne(mappedBy = "user_id")
-    private Alumno alumno;
+    private Alumno alumnos;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "user_id")
+    @OneToMany(mappedBy = "user")
     private List<Opinion> opiniones;
 
     @JsonIgnore

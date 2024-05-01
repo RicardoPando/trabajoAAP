@@ -20,5 +20,5 @@ public class Opinion {
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")
-    private User user;
+    private User users;
 }
