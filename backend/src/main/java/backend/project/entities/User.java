@@ -27,6 +27,18 @@ public class User {
     private Date passwordLastUpdate;
 
     @JsonIgnore
+    @OneToOne(mappedBy = "user_id")
+    private Asesor asesor;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "user_id")
+    private Alumno alumno;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user_id")
+    private List<Opinion> opiniones;
+
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_authorities",
