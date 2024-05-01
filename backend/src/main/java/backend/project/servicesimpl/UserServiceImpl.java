@@ -2,7 +2,6 @@ package backend.project.servicesimpl;
 
 import backend.project.dtos.DTOUser;
 import backend.project.entities.AuthorityName;
-import backend.project.entities.Employee;
 import backend.project.entities.User;
 import backend.project.exceptions.IncompleteDataException;
 import backend.project.exceptions.KeyRepeatedDataException;

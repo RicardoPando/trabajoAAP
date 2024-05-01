@@ -2,7 +2,6 @@ package backend.project;
 
 import backend.project.entities.*;
 import backend.project.repositories.*;
-import backend.project.services.EmployeeProjectService;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -23,10 +22,10 @@ public class BackendApplication {
 
 	@Bean
 	public CommandLineRunner mappingDemo(
-			EmployeeRepository employeeRepository,
+			/*EmployeeRepository employeeRepository,
 			ProjectRepository projectRepository,
 			EmployeeProjectRepository employeeProjectRepository,
-			EmployeeProjectService employeeProjectService,
+			EmployeeProjectService employeeProjectService,*/
 
 			AuthorityRepository authorityRepository,
 			UserRepository userRepository
@@ -67,7 +66,7 @@ public class BackendApplication {
 			);
 
 
-			Employee employeeSaved = employeeRepository.save(new Employee(Long.valueOf(0),"Cinthy","Lima",15000.0,null));
+			/*Employee employeeSaved = employeeRepository.save(new Employee(Long.valueOf(0),"Cinthy","Lima",15000.0,null));
 			employeeRepository.save(new Employee(Long.valueOf(0),"Gonzalo","Lima",15000.0,null));
 			employeeRepository.save(new Employee(Long.valueOf(0),"Gladys","Cuzco",5000.0,null));
 			employeeRepository.save(new Employee(Long.valueOf(0),"Walter","Lima",9000.0,null));
@@ -81,10 +80,10 @@ public class BackendApplication {
 			employeeRepository.save(employeeSaved);
 
 			employeeRepository.delete(employeeSaved);
-
+*/
 			//Un solo objeto como resultado
 
-			Employee employeeFound = employeeRepository.findById(Long.valueOf(3)).get();
+			/*Employee employeeFound = employeeRepository.findById(Long.valueOf(3)).get();
 
 			//Una lista de objetos como resultado
 
@@ -125,7 +124,7 @@ public class BackendApplication {
 			List<Employee> employeeRangoSalario = employeeRepository.findBySalaryBetween(1000.0, 10000.0);
 			for(Employee e: employeeRangoSalario) {
 				System.out.println(e);
-			}
+			}*/
 
 			//UPDATE ERROR COMUN
 			//Ejemplo: Cuando te pasan un ID y el nuevo salario
@@ -141,7 +140,7 @@ public class BackendApplication {
 			System.out.println("\n"+employeePromoted);
 			*/
 			//Version que es la correcta
-			Long idEmployeePromoted = Long.valueOf(8);
+			/*Long idEmployeePromoted = Long.valueOf(8);
 			Double newSalaryEmployeePromoted = 5000.0;
 			Employee e = employeeRepository.findById(idEmployeePromoted).get();
 			e.setSalary(newSalaryEmployeePromoted);
@@ -180,7 +179,7 @@ public class BackendApplication {
 			List<EmployeeProject> employeeProjectList = employeeProjectService.listAll();
 			for (EmployeeProject ep: employeeProjectList) {
 				System.out.println(ep);
-			}
+			}*/
 
 
 

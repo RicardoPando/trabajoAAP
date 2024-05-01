@@ -2,7 +2,6 @@ package backend.project.controllers;
 
 import backend.project.dtos.DTOToken;
 import backend.project.dtos.DTOUser;
-import backend.project.entities.Employee;
 import backend.project.entities.User;
 import backend.project.security.JwtUtilService;
 import backend.project.security.SecurityUser;
