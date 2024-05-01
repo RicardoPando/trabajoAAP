@@ -20,5 +20,19 @@ public class Alumno {
     private Integer ciclo;
     private String nombre;
     private String apellido;
+    //clase alumno
+    @JsonIgnore
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id",nullable = false)
+    private User user;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "alumno")
+    private List<AlumnoCurso> alumnosCursos;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "alumno")
+    private List<Asesoria> asesorias;
+
 
 }

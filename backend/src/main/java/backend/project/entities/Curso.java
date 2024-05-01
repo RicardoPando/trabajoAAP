@@ -18,4 +18,12 @@ public class Curso {
     private Long id;
     private String nombre;
     private Integer ciclo;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "alumno")
+    private List<AlumnoCurso> alumnosCursos;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "asesor")
+    private List<AsesorCurso> asesorCursos;
 }

@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "canales_contactos")
+@Table(name = "canal_contactos")
 public class CanalContacto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,4 +20,8 @@ public class CanalContacto {
     private String email;
     private String linkedin;
     private String url;
+    @JsonIgnore
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "canal_contacto")
+    private Asesor asesor;
 }
