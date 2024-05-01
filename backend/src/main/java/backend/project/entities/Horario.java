@@ -23,8 +23,8 @@ public class Horario {
     private Time horaFin;
 
     @ManyToOne
-    @JoinColumn(name = "asesores_id", nullable = false)
-    private Asesor asesores;
+    @JoinColumn(name = "asesor_id", nullable = false)
+    private Asesor asesor;
 
 
 }

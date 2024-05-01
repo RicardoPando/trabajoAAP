@@ -19,6 +19,6 @@ public class Opinion {
     private String comentario;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id")
-    private User users;
+    @JoinColumn(name = "user_id")
+    private User user;
 }

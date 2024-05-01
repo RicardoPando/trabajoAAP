@@ -31,12 +31,12 @@ public class Asesoria {
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "alumno_id", nullable = false)
-    private Alumno alumnos;
+    private Alumno alumno;
 
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "asesor_id", nullable = false)
-    private Asesor asesores;
+    private Asesor asesor;
 
 
 }

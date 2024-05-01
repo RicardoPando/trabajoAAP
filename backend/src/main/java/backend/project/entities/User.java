@@ -27,16 +27,16 @@ public class User {
     private Date passwordLastUpdate;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "user_id")
-    private Asesor asesores;
+    @OneToOne(mappedBy = "user")
+    private Asesor asesor;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "user_id")
-    private Alumno alumnos;
+    @OneToOne(mappedBy = "user")
+    private Alumno alumno;
 
     @JsonIgnore
     @OneToMany(mappedBy = "user")
-    private List<Opinion> opiniones;
+    private List<Opinion> opinion;
 
     @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)

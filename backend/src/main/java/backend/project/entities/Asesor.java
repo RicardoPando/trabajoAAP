@@ -24,7 +24,7 @@ public class Asesor {
     private String experiencia;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "user_id")
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id",nullable = false)
     private User user;
 
@@ -38,8 +38,9 @@ public class Asesor {
     @OneToMany(mappedBy = "asesor")
     private List<Asesoria> asesorias;
 
-    @OneToOne(mappedBy = "asesor")
+    @OneToOne(cascade = CascadeType.ALL)
     @JsonIgnore
-    private CanalContacto canalContactos;
+    @JoinColumn(name = "canal_contacto")
+    private CanalContacto canalContacto;
 
 }
