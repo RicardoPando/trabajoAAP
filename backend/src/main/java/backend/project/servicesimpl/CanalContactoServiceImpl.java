@@ -3,35 +3,33 @@ import backend.project.exceptions.IncompleteDataException;
 import backend.project.exceptions.KeyRepeatedDataException;
 import backend.project.exceptions.ResourceNotFoundException;
 
-import backend.project.repositories.AsesorRepository;
-import backend.project.entities.Asesor;
-import backend.project.services.AsesorService;
+import backend.project.repositories.CanalContactoRepository;
+import backend.project.entities.CanalContacto;
+import backend.project.services.CanalContactoService;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
-
-public class AsesorServiceImpl implements AsesorService {
-
-
+public class CanalContactoServiceImpl implements CanalContactoService {
     @Override
-    public List<Asesor> listAll() {
+    public List<CanalContacto> listAll() {
         return null;
     }
 
     @Override
-    public List<Asesor> listByName(String name) {
+    public List<CanalContacto> listByName(String name) {
         return null;
     }
 
     @Override
-    public Asesor findById(Long id) {
+    public CanalContacto findById(Long id) {
         return null;
     }
 
     @Override
-    public Asesor save(Asesor asesor) {
+    public CanalContacto save(CanalContacto canalContacto) {
         return null;
     }
 

@@ -3,35 +3,33 @@ import backend.project.exceptions.IncompleteDataException;
 import backend.project.exceptions.KeyRepeatedDataException;
 import backend.project.exceptions.ResourceNotFoundException;
 
-import backend.project.repositories.AsesorRepository;
-import backend.project.entities.Asesor;
-import backend.project.services.AsesorService;
+import backend.project.repositories.HorarioRepository;
+import backend.project.entities.Horario;
+import backend.project.services.HorarioService;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
-
-public class AsesorServiceImpl implements AsesorService {
-
-
+public class HorarioServiceImpl implements HorarioService {
     @Override
-    public List<Asesor> listAll() {
+    public List<Horario> listAll() {
         return null;
     }
 
     @Override
-    public List<Asesor> listByName(String name) {
+    public List<Horario> listByName(String name) {
         return null;
     }
 
     @Override
-    public Asesor findById(Long id) {
+    public Horario findById(Long id) {
         return null;
     }
 
     @Override
-    public Asesor save(Asesor asesor) {
+    public Horario save(Horario horario) {
         return null;
     }
 

@@ -3,35 +3,33 @@ import backend.project.exceptions.IncompleteDataException;
 import backend.project.exceptions.KeyRepeatedDataException;
 import backend.project.exceptions.ResourceNotFoundException;
 
-import backend.project.repositories.AsesorRepository;
-import backend.project.entities.Asesor;
-import backend.project.services.AsesorService;
+import backend.project.repositories.OpinionRepository;
+import backend.project.entities.Opinion;
+import backend.project.services.OpinionService;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
-
-public class AsesorServiceImpl implements AsesorService {
-
-
+public class OpinionServiceImpl implements OpinionService {
     @Override
-    public List<Asesor> listAll() {
+    public List<Opinion> listAll() {
         return null;
     }
 
     @Override
-    public List<Asesor> listByName(String name) {
+    public List<Opinion> listByName(String name) {
         return null;
     }
 
     @Override
-    public Asesor findById(Long id) {
+    public Opinion findById(Long id) {
         return null;
     }
 
     @Override
-    public Asesor save(Asesor asesor) {
+    public Opinion save(Opinion opinion) {
         return null;
     }
 
