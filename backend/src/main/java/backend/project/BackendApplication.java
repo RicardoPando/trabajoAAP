@@ -12,8 +12,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.print.attribute.DateTimeSyntax;
+import java.sql.Time;
 import java.text.DateFormat;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -33,7 +35,9 @@ public class BackendApplication {
 
 			AuthorityRepository authorityRepository,
 			UserRepository userRepository,
-			OpinionRepository opinionRepository
+			OpinionRepository opinionRepository,
+			CanalContactoRepository canalContactoRepository,
+			HorarioRepository horarioRepository
 	) {
 		return args -> {
             //CRUD
@@ -81,6 +85,9 @@ public class BackendApplication {
 				System.out.println(e);
 			}
 
+			CanalContacto canalContacto = canalContactoRepository.save(new CanalContacto(Long.valueOf(0),"987654321","josue@gmail","josuemoreira","ww.josue.com",null));
+
+			Horario horario = horarioRepository.save(new Horario(Long.valueOf(0), "lunes",Time.valueOf(LocalTime.of(10,20,10)),Time.valueOf(LocalTime.of(11,20,10)),null ));
 			/*Employee employeeSaved = employeeRepository.save(new Employee(Long.valueOf(0),"Cinthy","Lima",15000.0,null));
 			employeeRepository.save(new Employee(Long.valueOf(0),"Gonzalo","Lima",15000.0,null));
 			employeeRepository.save(new Employee(Long.valueOf(0),"Gladys","Cuzco",5000.0,null));

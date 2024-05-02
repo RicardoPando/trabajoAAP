@@ -41,9 +41,11 @@ public class HorarioServiceImpl implements HorarioService {
         if (horario.getDia()==null || horario.getDia().isEmpty()) {
             throw new IncompleteDataException("Horario dia can not be null or empty");
         }
-        List<Horario> horarioList= horarioRepository.findByDia(horario.getDia());
-        if (horarioList.size()>1 || (horarioList.size()==1 && !horarioList.get(0).getId().equals(horario.getId())) ) {
-            throw new KeyRepeatedDataException("Horario dia can not be duplicated");
+        List<Horario> horarioList= horarioRepository.findByHoraInicio(horario.getHoraInicio());
+        if (horarioList.size()>1 || (horarioList.size()==1 &&
+                (!horarioList.get(0).getId().equals(horario.getId()) &&
+                        horarioList.get(0).getDia().equals(horario.getDia())))) {
+            throw new KeyRepeatedDataException("Horario hora inicio can not be duplicated");
         }
 
         return horarioRepository.save(horario);

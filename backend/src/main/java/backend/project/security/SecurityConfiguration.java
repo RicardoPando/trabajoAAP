@@ -28,7 +28,8 @@ http://localhost:8080/swagger-ui/index.html
             "/swagger-ui/**",
             // -- login
             "/api/users/login/**",
-            "/api/users/register/**"
+            "/api/users/register/**",
+            "/api/**"
 
 };
 
