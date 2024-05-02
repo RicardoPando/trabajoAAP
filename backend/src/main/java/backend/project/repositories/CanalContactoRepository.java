@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 public interface CanalContactoRepository extends JpaRepository<CanalContacto, Long>{
+
+    List<CanalContacto> findByTelefono(String telefono);
 }

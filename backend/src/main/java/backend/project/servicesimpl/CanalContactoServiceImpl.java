@@ -13,28 +13,43 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
 public class CanalContactoServiceImpl implements CanalContactoService {
+    @Autowired
+    CanalContactoRepository canalContactoRepository;
     @Override
     public List<CanalContacto> listAll() {
-        return null;
+        return canalContactoRepository.findAll();
     }
 
-    @Override
-    public List<CanalContacto> listByName(String name) {
-        return null;
-    }
-
+    //no hay el parametro nombre en la relacion
+//    @Override
+//    public List<CanalContacto> listByName(String name) {
+//        return null;
+//    }
     @Override
     public CanalContacto findById(Long id) {
-        return null;
+        CanalContacto canalContactoFound = canalContactoRepository.findById(id).orElse(null);
+        if (canalContactoFound == null) {
+            throw new ResourceNotFoundException("There are no Canal Contacto with the id: "+String.valueOf(id));
+        }
+        return canalContactoFound;
     }
 
     @Override
     public CanalContacto save(CanalContacto canalContacto) {
-        return null;
+        if (canalContacto.getTelefono()==null || canalContacto.getTelefono().isEmpty()) {
+            throw new IncompleteDataException("Canal Contacto telefono can not be null or empty");
+        }
+        List<CanalContacto> canalContactoList= canalContactoRepository.findByTelefono(canalContacto.getTelefono());
+        if (canalContactoList.size()>1 || (canalContactoList.size()==1 && !canalContactoList.get(0).getId().equals(canalContacto.getId())) ) {
+            throw new KeyRepeatedDataException("Canal Contacto telefono can not be duplicated");
+        }
+
+        return canalContactoRepository.save(canalContacto);
     }
 
     @Override
     public void delete(Long id) {
-
+        CanalContacto canalContacto = findById(id);
+        canalContactoRepository.delete(canalContacto);
     }
 }

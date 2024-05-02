@@ -8,8 +8,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import javax.print.attribute.DateTimeSyntax;
+import java.text.DateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -28,7 +32,8 @@ public class BackendApplication {
 			EmployeeProjectService employeeProjectService,*/
 
 			AuthorityRepository authorityRepository,
-			UserRepository userRepository
+			UserRepository userRepository,
+			OpinionRepository opinionRepository
 	) {
 		return args -> {
             //CRUD
@@ -65,6 +70,16 @@ public class BackendApplication {
 					)
 			);
 
+
+			//guardar las opiniones
+			Opinion opinion = opinionRepository.save(new Opinion(Long.valueOf(0), new Date(2021/1/1),"hola",null));
+
+			//listar todas las opiniones
+			List<Opinion> opinions = opinionRepository.findAll();
+			System.out.println("\nLista Completa");
+			for(Opinion e: opinions) {
+				System.out.println(e);
+			}
 
 			/*Employee employeeSaved = employeeRepository.save(new Employee(Long.valueOf(0),"Cinthy","Lima",15000.0,null));
 			employeeRepository.save(new Employee(Long.valueOf(0),"Gonzalo","Lima",15000.0,null));

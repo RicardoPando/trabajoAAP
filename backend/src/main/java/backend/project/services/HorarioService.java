@@ -5,7 +5,8 @@ import java.util.List;
 
 public interface HorarioService {
     public List<Horario> listAll();
-    public List<Horario> listByName(String name);
+    // no tiene el parametro nombre en la relacion
+//    public List<Horario> listByName(String name);
 
     public Horario findById(Long id);
 

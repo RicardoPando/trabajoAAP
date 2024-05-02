@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 public interface HorarioRepository extends JpaRepository<Horario, Long>{
+    List<Horario> findByDia(String dia);
 }

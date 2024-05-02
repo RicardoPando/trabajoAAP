@@ -13,28 +13,39 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
 public class OpinionServiceImpl implements OpinionService {
-    @Override
-    public List<Opinion> listAll() {
-        return null;
-    }
 
+    @Autowired
+    OpinionRepository opinionRepository;
     @Override
-    public List<Opinion> listByName(String name) {
-        return null;
+    public List<Opinion> listAll() { return opinionRepository.findAll();
     }
+// no tiene el parametro name la relacion
+//    @Override
+//    public List<Opinion> listByName(String name) {
+//        return null;
+//    }
 
     @Override
     public Opinion findById(Long id) {
-        return null;
+        Opinion opinionFound = opinionRepository.findById(id).orElse(null);
+        if (opinionFound == null) {
+            throw new ResourceNotFoundException("There are no Opinion with the id: "+String.valueOf(id));
+        }
+        return opinionFound;
     }
 
     @Override
     public Opinion save(Opinion opinion) {
-        return null;
-    }
 
+        if (opinion.getComentario()==null || opinion.getComentario().isEmpty()) {
+            throw new IncompleteDataException("Opinion coment can not be null or empty");
+        }
+        return opinionRepository.save(opinion);
+    }
     @Override
     public void delete(Long id) {
+        Opinion opinion = findById(id);
+        opinionRepository.delete(opinion);
 
     }
 }

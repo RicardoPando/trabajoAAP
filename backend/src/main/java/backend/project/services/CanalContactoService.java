@@ -5,7 +5,8 @@ import java.util.List;
 
 public interface CanalContactoService {
     public List<CanalContacto> listAll();
-    public List<CanalContacto> listByName(String name);
+    //no hay el parametro en la relacion
+//    public List<CanalContacto> listByName(String name);
 
     public CanalContacto findById(Long id);
 

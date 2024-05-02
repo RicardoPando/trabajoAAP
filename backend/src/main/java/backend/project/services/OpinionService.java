@@ -5,7 +5,8 @@ import java.util.List;
 
 public interface OpinionService {
     public List<Opinion> listAll();
-    public List<Opinion> listByName(String name);
+    // no tiene el parametro name la relacion
+//    public List<Opinion> listByName(String name);
 
     public Opinion findById(Long id);
 

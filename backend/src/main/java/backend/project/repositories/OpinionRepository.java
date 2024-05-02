@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 public interface OpinionRepository extends JpaRepository<Opinion, Long> {
+
 }
