@@ -38,6 +38,10 @@ public class Asesoria {
     @JoinColumn(name = "asesor_id", nullable = false)
     private Asesor asesor;
 
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "curso_id", nullable = false)
+    private Curso curso;
 
 }
 
