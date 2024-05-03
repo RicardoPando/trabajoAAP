@@ -31,10 +31,10 @@ public class AsesorCursoServiceImpl implements AsesorCursoService{
     @Override
     public List<AsesorCurso> findByAsesor_Id(Long id) {
         List<AsesorCurso> asesorCursos = asesorCursoRepository.findByAsesor_Id(id);
-        for (AsesorCurso ep: asesorCursos) {
+        for (AsesorCurso ac: asesorCursos) {
             //elimina la bidireccionalidad
-            ep.getAsesor().setAsesorCursos(null);
-            ep.getCurso().setAsesorCursos(null);
+            ac.getAsesor().setAsesorCursos(null);
+            ac.getCurso().setAsesorCursos(null);
         }
         return asesorCursos;
     }
@@ -42,10 +42,10 @@ public class AsesorCursoServiceImpl implements AsesorCursoService{
     public List<AsesorCurso> findByCurso_Id(Long id) {
 
         List<AsesorCurso> asesorCursos = asesorCursoRepository.findByCurso_Id(id);
-        for (AsesorCurso ep: asesorCursos) {
+        for (AsesorCurso ac: asesorCursos) {
             //elimina la bidireccionalidad
-            ep.getAsesor().setAsesorCursos(null);
-            ep.getCurso().setAsesorCursos(null);
+            ac.getAsesor().setAsesorCursos(null);
+            ac.getCurso().setAsesorCursos(null);
         }
         return asesorCursos;
     }

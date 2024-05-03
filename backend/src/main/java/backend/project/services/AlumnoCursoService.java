@@ -9,7 +9,6 @@ public interface AlumnoCursoService {
     public List<AlumnoCurso> listAll();
     public List<AlumnoCurso> findByAlumno_Id(Long id);
     public List<AlumnoCurso> findByCurso_Id(Long id);
-    public List<AlumnoCurso> listByName(String name);
     public List<Alumno>  findAlumno_ByCurso_Id(Long id);
     public List<Curso>  findCurso_ByAlumno_Id(Long id);
     public AlumnoCurso findById(Long id);
