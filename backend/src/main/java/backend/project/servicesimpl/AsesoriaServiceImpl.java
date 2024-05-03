@@ -71,13 +71,19 @@ public class AsesoriaServiceImpl implements AsesoriaService{
     }
     @Override
     public Asesoria save(Asesoria asesoria) {
-//        Alumno alumno = alumnoRepository.findById(asesoria.getAlumno().getId()).get();
-//        Curso curso = cursoRepository.findById(asesoria.getCurso().getId()).get();
-//        Asesor asesor = asesorRepository.findById(asesoria.getAsesor().getId()).get();
-//        asesoria.setAlumno(alumno);
-//        asesoria.setCurso(curso);
-//        asesoria.setAsesor(asesor);
-        return asesoriaRepository.save(asesoria);
+
+        Alumno alumno = alumnoRepository.findById(asesoria.getAlumno().getId()).get();
+        Curso curso = cursoRepository.findById(asesoria.getCurso().getId()).get();
+        Asesor asesor = asesorRepository.findById(asesoria.getAsesor().getId()).get();
+        asesoria.setAlumno(alumno);
+        asesoria.setCurso(curso);
+        asesoria.setAsesor(asesor);
+        Asesoria newAsesoria=asesoriaRepository.save(asesoria);
+        newAsesoria.getAsesor().setHorarios(null);
+        newAsesoria.getAsesor().setAsesorias(null);
+        newAsesoria.getAsesor().setAsesorCursos(null);
+
+        return newAsesoria;
     }
 
     @Override

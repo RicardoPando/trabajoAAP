@@ -28,17 +28,17 @@ public class Asesoria {
     private Integer duracion;
     private Double montoCobrado;
 
-    @JsonIgnore
+    //@JsonIgnore
     @ManyToOne
     @JoinColumn(name = "alumno_id", nullable = true)
     private Alumno alumno;
 
-    @JsonIgnore
+    //@JsonIgnore
     @ManyToOne
     @JoinColumn(name = "asesor_id", nullable = true)
     private Asesor asesor;
 
-    @JsonIgnore
+    //@JsonIgnore
     @ManyToOne
     @JoinColumn(name = "curso_id", nullable = true)
     private Curso curso;
