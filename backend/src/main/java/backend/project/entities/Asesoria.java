@@ -30,17 +30,17 @@ public class Asesoria {
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "alumno_id", nullable = false)
+    @JoinColumn(name = "alumno_id", nullable = true)
     private Alumno alumno;
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "asesor_id", nullable = false)
+    @JoinColumn(name = "asesor_id", nullable = true)
     private Asesor asesor;
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "curso_id", nullable = false)
+    @JoinColumn(name = "curso_id", nullable = true)
     private Curso curso;
 
 }

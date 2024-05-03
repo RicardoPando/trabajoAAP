@@ -54,4 +54,9 @@ public class CursoServiceImpl implements CursoService{
         cursoRepository.delete(curso);
 
     }
+
+    @Override
+    public Curso update(Long id, Curso curso) {
+        return null;
+    }
 }

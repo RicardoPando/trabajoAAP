@@ -23,13 +23,10 @@ public class UserController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
-
     @Autowired
     UserDetailsService userDetailsService;
-
     @Autowired
     private JwtUtilService jwtUtilService;
-
     @Autowired
     UserService userService;
 
@@ -38,25 +35,16 @@ public class UserController {
         User newUser = userService.register(user);
         return new ResponseEntity<User>(newUser, HttpStatus.CREATED);
     }
-
-
     @PutMapping("/users")
     public ResponseEntity<User> updateUser(@RequestBody DTOUser user) {
         User newUser = userService.changePassword(user);
         return new ResponseEntity<User>(newUser, HttpStatus.OK);
     }
-
-
     @GetMapping("/users/{id}")
     public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
         User user = userService.findById(id);
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
-
-
-
-
-
     @PostMapping("/users/login")
     public ResponseEntity<DTOToken> authenticate(@RequestBody DTOUser user) {
         authenticationManager.authenticate(

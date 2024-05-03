@@ -77,7 +77,6 @@ public class AsesorCursoServiceImpl implements AsesorCursoService{
 
     @Override
     public AsesorCurso findById(Long id) {
-
         AsesorCurso asesorCursoFound = asesorCursoRepository.findById(id).orElse(null);
         if (asesorCursoFound == null) {
             throw new ResourceNotFoundException("There are no Asesor Curso with the id: "+String.valueOf(id));

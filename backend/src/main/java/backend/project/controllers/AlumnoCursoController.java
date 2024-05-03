@@ -17,9 +17,9 @@ public class AlumnoCursoController {
     AlumnoCursoService alumnoCursoService;
     //listar
     @GetMapping("/alumno_curso")
-    public ResponseEntity<AlumnoCurso> getAllAlumnoCurso(Long id) {
-        AlumnoCurso alumnoCurso = alumnoCursoService.findById(id);
-        return new ResponseEntity<AlumnoCurso>(alumnoCurso, HttpStatus.OK);
+    public ResponseEntity<List<AlumnoCurso>> getAllAlumnoCurso() {
+        List<AlumnoCurso> alumnoCurso = alumnoCursoService.listAll();
+        return new ResponseEntity<List<AlumnoCurso>>(alumnoCurso, HttpStatus.OK);
     }
     @GetMapping("/alumno_curso/{id}")
     public ResponseEntity<AlumnoCurso> getAlumnoCursoById(@PathVariable("id") Long id) {

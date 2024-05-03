@@ -19,9 +19,9 @@ public class AsesorCursoController {
     AsesorCursoService asesorCursoService;
     //listar
     @GetMapping("/asesor_curso")
-    public ResponseEntity<AsesorCurso> getAllAsesorCurso(Long id) {
-        AsesorCurso asesorCurso = asesorCursoService.findById(id);
-        return new ResponseEntity<AsesorCurso>(asesorCurso, HttpStatus.OK);
+    public ResponseEntity<List<AsesorCurso>> getAllAsesorCurso() {
+        List<AsesorCurso> asesorCurso = asesorCursoService.listAll();
+        return new ResponseEntity<List<AsesorCurso>>(asesorCurso, HttpStatus.OK);
     }
     @GetMapping("/asesor_curso/{id}")
     public ResponseEntity<AsesorCurso> getAsesorCursoById(@PathVariable("id") Long id) {

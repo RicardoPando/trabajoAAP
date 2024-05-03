@@ -1,23 +1,13 @@
 package backend.project.servicesimpl;
-import backend.project.entities.Alumno;
-import backend.project.entities.Asesor;
-import backend.project.entities.Asesoria;
-import backend.project.entities.Curso;
-
-import backend.project.exceptions.IncompleteDataException;
-import backend.project.exceptions.KeyRepeatedDataException;
+import backend.project.entities.*;
 import backend.project.exceptions.ResourceNotFoundException;
-
 import backend.project.repositories.AlumnoRepository;
 import backend.project.repositories.AsesorRepository;
 import backend.project.repositories.AsesoriaRepository;
 import backend.project.repositories.CursoRepository;
-
 import backend.project.services.AsesoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 @Service
 public class AsesoriaServiceImpl implements AsesoriaService{
@@ -32,56 +22,63 @@ public class AsesoriaServiceImpl implements AsesoriaService{
 
     @Override
     public List<Asesoria> listAll() {
-        return null;
+        return asesoriaRepository.findAll();
     }
-
     @Override
     public List<Asesoria> findByAlumno_Id(Long id) {
-        return null;
+        List<Asesoria> asesorias = asesoriaRepository.findByAlumno_Id(id);
+        for (Asesoria a: asesorias) {
+            //elimina la bidireccionalidad
+            a.getAsesor().setAsesorias(null);
+            a.getCurso().setAsesorias(null);
+            a.getAlumno().setAsesorias(null);
+        }
+        return asesorias;
     }
-
     @Override
     public List<Asesoria> findByAsesor_Id(Long id) {
-        return null;
+        List<Asesoria> asesorias = asesoriaRepository.findByAsesor_Id(id);
+        for (Asesoria a: asesorias) {
+            //elimina la bidireccionalidad
+            a.getAsesor().setAsesorias(null);
+            a.getCurso().setAsesorias(null);
+            a.getAlumno().setAsesorias(null);
+        }
+        return asesorias;
     }
-
     @Override
     public List<Asesoria> findByCurso_Id(Long id) {
-        return null;
+        List<Asesoria> asesorias = asesoriaRepository.findByCurso_Id(id);
+        for (Asesoria a: asesorias) {
+            //elimina la bidireccionalidad
+            a.getAsesor().setAsesorias(null);
+            a.getCurso().setAsesorias(null);
+            a.getAlumno().setAsesorias(null);
+        }
+        return asesorias;
     }
-
-    @Override
-    public List<Asesoria> listByName(String name) {
-        return null;
-    }
-
-    @Override
-    public List<Alumno> findAsesoria_ByAlumno_Id(Long id) {
-        return null;
-    }
-
-    @Override
-    public List<Curso> findAsesoria_ByCurso_Id(Long id) {
-        return null;
-    }
-
-    @Override
-    public List<Asesor> findAsesoria_ByAsesor_Id(Long id) {
-        return null;
-    }
-
     @Override
     public Asesoria findById(Long id) {
-        return null;
+        Asesoria asesoriaFound = asesoriaRepository.findById(id).orElse(null);
+        if (asesoriaFound == null) {
+            throw new ResourceNotFoundException("There are no Asesoria with the id: "+String.valueOf(id));
+        }
+        return asesoriaFound;
     }
-
     @Override
     public Asesoria save(Asesoria asesoria) {
-        return null;
+//        Alumno alumno = alumnoRepository.findById(asesoria.getAlumno().getId()).get();
+//        Curso curso = cursoRepository.findById(asesoria.getCurso().getId()).get();
+//        Asesor asesor = asesorRepository.findById(asesoria.getAsesor().getId()).get();
+//        asesoria.setAlumno(alumno);
+//        asesoria.setCurso(curso);
+//        asesoria.setAsesor(asesor);
+        return asesoriaRepository.save(asesoria);
     }
 
     @Override
     public void delete(Long id) {
-
+        Asesoria asesoria = findById(id);
+        asesoriaRepository.delete(asesoria);
     }
 }

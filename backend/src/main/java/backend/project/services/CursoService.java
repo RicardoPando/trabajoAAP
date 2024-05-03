@@ -9,4 +9,5 @@ public interface CursoService {
 
     public Curso save(Curso curso);
     public void delete(Long id);
+    public Curso update(Long id,Curso curso);
 }
