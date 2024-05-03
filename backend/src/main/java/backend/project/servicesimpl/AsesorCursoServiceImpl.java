@@ -2,20 +2,12 @@ package backend.project.servicesimpl;
 import backend.project.entities.Asesor;
 import backend.project.entities.Curso;
 import backend.project.entities.AsesorCurso;
-
-import backend.project.exceptions.IncompleteDataException;
-import backend.project.exceptions.KeyRepeatedDataException;
 import backend.project.exceptions.ResourceNotFoundException;
-
 import backend.project.repositories.*;
-
 import backend.project.services.AsesorCursoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -28,46 +20,95 @@ public class AsesorCursoServiceImpl implements AsesorCursoService{
     CursoRepository cursoRepository;
     @Override
     public List<AsesorCurso> listAll() {
-        return null;
+        List<AsesorCurso> asesorCursos = asesorCursoRepository.findAll();
+        for (AsesorCurso ep: asesorCursos) {
+            //elimina la bidireccionalidad
+            ep.getAsesor().setAsesorCursos(null);
+            ep.getCurso().setAsesorCursos(null);
+        }
+        return asesorCursos;
     }
-
     @Override
     public List<AsesorCurso> findByAsesor_Id(Long id) {
-        return null;
+        List<AsesorCurso> asesorCursos = asesorCursoRepository.findByAsesor_Id(id);
+        for (AsesorCurso ep: asesorCursos) {
+            //elimina la bidireccionalidad
+            ep.getAsesor().setAsesorCursos(null);
+            ep.getCurso().setAsesorCursos(null);
+        }
+        return asesorCursos;
     }
-
     @Override
     public List<AsesorCurso> findByCurso_Id(Long id) {
-        return null;
-    }
 
+        List<AsesorCurso> asesorCursos = asesorCursoRepository.findByCurso_Id(id);
+        for (AsesorCurso ep: asesorCursos) {
+            //elimina la bidireccionalidad
+            ep.getAsesor().setAsesorCursos(null);
+            ep.getCurso().setAsesorCursos(null);
+        }
+        return asesorCursos;
+    }
     @Override
-    public List<AsesorCurso> listByName(String name) {
-        return null;
+    public List<AsesorCurso> listByNivelDominio(Integer nivelDominio) {
+        List<AsesorCurso> asesorCursos = asesorCursoRepository.findAllByNivelDominio(nivelDominio);
+        for (AsesorCurso ep: asesorCursos) {
+            //elimina la bidireccionalidad
+            ep.getAsesor().setAsesorCursos(null);
+            ep.getCurso().setAsesorCursos(null);
+        }
+        return asesorCursos;
     }
 
     @Override
     public List<Asesor> findAsesor_ByCurso_Id(Long id) {
-        return null;
+        List<AsesorCurso> asesorCursos = asesorCursoRepository.findByCurso_Id(id);
+        List<Asesor> asesorList = new ArrayList<>();
+        for (AsesorCurso ac: asesorCursos) {
+            //para romper la bidireccionalidad
+            ac.getAsesor().setAsesorCursos(null);
+            //agrega el asesor a la lista asesorList
+            asesorList.add(ac.getAsesor());
+        }
+        return asesorList;
     }
 
     @Override
     public List<Curso> findCurso_ByAsesor_Id(Long id) {
-        return null;
+        List<AsesorCurso> asesorCursos = asesorCursoRepository.findByAsesor_Id(id);
+        List<Curso> cursoList = new ArrayList<>();
+        for (AsesorCurso ac: asesorCursos) {
+            //para romper la bidireccionalidad
+            ac.getAsesor().setAsesorCursos(null);
+            //agrega el curso a la lista cursoList
+            cursoList.add(ac.getCurso());
+        }
+        return cursoList;
     }
 
     @Override
     public AsesorCurso findById(Long id) {
-        return null;
+
+        AsesorCurso asesorCursoFound = asesorCursoRepository.findById(id).orElse(null);
+        if (asesorCursoFound == null) {
+            throw new ResourceNotFoundException("There are no Asesor Curso with the id: "+String.valueOf(id));
+        }
+        return asesorCursoFound;
     }
 
     @Override
     public AsesorCurso save(AsesorCurso asesorCurso) {
-        return null;
+        Asesor asesor=asesorRepository.findById(asesorCurso.getAsesor().getId()).get();
+        Curso curso=cursoRepository.findById(asesorCurso.getCurso().getId()).get();
+        asesorCurso.setAsesor(asesor);
+        asesorCurso.setCurso(curso);
+        return asesorCursoRepository.save(asesorCurso);
     }
 
     @Override
     public void delete(Long id) {
+        AsesorCurso asesorCurso = findById(id);
+        asesorCursoRepository.delete(asesorCurso);
 
     }
 }

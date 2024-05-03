@@ -9,7 +9,7 @@ public interface AsesorCursoService {
     public List<AsesorCurso> listAll();
     public List<AsesorCurso> findByAsesor_Id(Long id);
     public List<AsesorCurso> findByCurso_Id(Long id);
-    public List<AsesorCurso> listByName(String name);
+    public List<AsesorCurso> listByNivelDominio(Integer nivelDominio);
     public List<Asesor>  findAsesor_ByCurso_Id(Long id);
     public List<Curso>  findCurso_ByAsesor_Id(Long id);
     public AsesorCurso findById(Long id);
