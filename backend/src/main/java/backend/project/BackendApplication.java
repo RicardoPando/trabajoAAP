@@ -90,8 +90,7 @@ public class BackendApplication {
 
 			Horario horario = horarioRepository.save(new Horario(Long.valueOf(0), "lunes",Time.valueOf(LocalTime.of(10,20,10)),Time.valueOf(LocalTime.of(11,20,10)),null ));
 
-			Asesoria asesoria = asesoriaRepository.save(new Asesoria(Long.valueOf(0),new Date(2021/1/1),100.00,new Date(2021/1/2),null,null,null,null,null,null,null,
-			null,null,null));
+			Asesoria asesoria = asesoriaRepository.save(new Asesoria(Long.valueOf(0),new Date(2021/1/1),100.00,new Date(2021/1/2),null,null,null,null,null,null,null,null,null,null));
 
 
 
