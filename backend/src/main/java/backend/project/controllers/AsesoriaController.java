@@ -1,4 +1,5 @@
 package backend.project.controllers;
+import backend.project.dtos.DTOAsesoriaSummary;
 import backend.project.entities.Asesor;
 import backend.project.entities.Asesoria;
 import backend.project.entities.AsesoriaEstado;
@@ -108,5 +109,10 @@ public class AsesoriaController {
     public ResponseEntity<HttpStatus> deleteAsesoria(@PathVariable("id") Long id) {
         asesoriaService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+    @GetMapping("/asesoria/summary")
+    public ResponseEntity<List<DTOAsesoriaSummary>> getAsesoriaSummary() {
+        List<DTOAsesoriaSummary> dtoAsesoriaSummaryList = asesoriaService.listAsesoriaSummary();
+        return new ResponseEntity<List<DTOAsesoriaSummary>>(dtoAsesoriaSummaryList, HttpStatus.OK);
     }
 }

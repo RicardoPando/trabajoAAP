@@ -1,13 +1,15 @@
 package backend.project.servicesimpl;
+import backend.project.dtos.DTOAsesoriaSummary;
 import backend.project.entities.*;
+import backend.project.exceptions.IncompleteDataException;
 import backend.project.exceptions.ResourceNotFoundException;
-import backend.project.repositories.AlumnoRepository;
-import backend.project.repositories.AsesorRepository;
-import backend.project.repositories.AsesoriaRepository;
-import backend.project.repositories.CursoRepository;
+import backend.project.repositories.*;
 import backend.project.services.AsesoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 @Service
 public class AsesoriaServiceImpl implements AsesoriaService{
@@ -19,6 +21,8 @@ public class AsesoriaServiceImpl implements AsesoriaService{
     AsesoriaRepository asesoriaRepository;
     @Autowired
     CursoRepository cursoRepository;
+    @Autowired
+    private OpinionRepository opinionRepository;
 
     @Override
     public List<Asesoria> listAll() {
@@ -80,5 +84,24 @@ public class AsesoriaServiceImpl implements AsesoriaService{
     public void delete(Long id) {
         Asesoria asesoria = findById(id);
         asesoriaRepository.delete(asesoria);
+    }
+
+    @Override
+    public List<DTOAsesoriaSummary> listAsesoriaSummary(){
+        List<Asesoria> asesorias = asesoriaRepository.findAll();
+        List<DTOAsesoriaSummary> asesoriaSummaryList = new ArrayList<>();
+        for (Asesoria a: asesorias) {
+            String asesorName = a.getAsesor().getNombre();
+            String alumnoName = a.getAlumno().getNombre();
+            String cursoName = a.getCurso().getNombre();
+            Date fecha = a.getFechaRealizado();
+            Integer duracion= a.getDuracion();
+            String opinion = a.getAsesor().getUser().getOpinion() != null ? a.getAsesor().getUser().getOpinion().toString() : null;
+            DTOAsesoriaSummary dtoAsesoriaSummary = new DTOAsesoriaSummary(asesorName,alumnoName,cursoName,fecha,duracion,opinion);
+            asesoriaSummaryList.add(dtoAsesoriaSummary);
+        }
+
+        return asesoriaSummaryList;
+
     }
 }

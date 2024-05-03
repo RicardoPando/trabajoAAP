@@ -1,4 +1,5 @@
 package backend.project.services;
+import backend.project.dtos.DTOAsesoriaSummary;
 import backend.project.entities.Asesoria;
 
 
@@ -13,5 +14,5 @@ public interface AsesoriaService {
     public Asesoria findById(Long id);
     public Asesoria save(Asesoria asesoria);
     public void delete(Long id);
-
+    public List<DTOAsesoriaSummary> listAsesoriaSummary();
 }

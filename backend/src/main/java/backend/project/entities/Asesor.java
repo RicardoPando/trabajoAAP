@@ -40,7 +40,7 @@ public class Asesor {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JsonIgnore
-    @JoinColumn(name = "canal_contacto")
+    @JoinColumn(name = "canal_contacto_id")
     private CanalContacto canalContacto;
 
 }
