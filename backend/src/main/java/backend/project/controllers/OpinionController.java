@@ -54,6 +54,7 @@ public class OpinionController {
         if (opinion.getUser()!=null) {
             foundOpinion.setUser(opinion.getUser());
         }
+
         Opinion newOpinion = opinionService.save(foundOpinion);
         return new ResponseEntity<Opinion>(newOpinion, HttpStatus.OK);
     }

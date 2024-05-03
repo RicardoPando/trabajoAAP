@@ -65,6 +65,10 @@ public class AlumnoController {
         if (alumno.getAsesorias()!=null) {
             foundAlumno.setAsesorias(alumno.getAsesorias());
         }
+        if (alumno.getUser()!=null) {
+            foundAlumno.setUser(alumno.getUser());
+        }
+
         Alumno newAlumno = alumnoService.save(foundAlumno);
         return new ResponseEntity<Alumno>(newAlumno, HttpStatus.OK);
     }

@@ -54,9 +54,9 @@ public class HorarioController {
         if (horario.getHoraFin()!=null) {
             foundHorario.setHoraFin(horario.getHoraFin());
         }
-//        if (horario.getAsesor()!=null) {
-//            foundHorario.setAsesor(horario.getAsesor());
-//        }
+        if (horario.getAsesor()!=null) {
+            foundHorario.setAsesor(horario.getAsesor());
+        }
         Horario newHorario = horarioService.save(foundHorario);
         return new ResponseEntity<Horario>(newHorario, HttpStatus.OK);
     }

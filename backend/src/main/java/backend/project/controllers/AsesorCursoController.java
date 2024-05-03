@@ -1,6 +1,7 @@
 package backend.project.controllers;
 import backend.project.entities.Asesor;
 import backend.project.entities.AsesorCurso;
+import backend.project.entities.Asesoria;
 import backend.project.entities.Curso;
 import backend.project.services.AsesorCursoService;
 import org.apache.xmlbeans.impl.store.Cur;
@@ -61,7 +62,21 @@ public class AsesorCursoController {
     //modificar
     @PutMapping("/asesor_curso/{id}")
     public ResponseEntity<AsesorCurso> updateAsesorCurso(@RequestBody AsesorCurso asesorCurso, @PathVariable("id") Long id) {
-        AsesorCurso newAsesorCurso = asesorCursoService.save(asesorCurso);
+        AsesorCurso foundAsesroCurso = asesorCursoService.findById(id);
+        if(asesorCurso.getNivelDominio()!=null){
+            foundAsesroCurso.setNivelDominio(asesorCurso.getNivelDominio());
+        }
+        if(asesorCurso.getDisponibilidad()!=null){
+            foundAsesroCurso.setDisponibilidad(asesorCurso.getDisponibilidad());
+        }
+        if(asesorCurso.getCurso()!=null){
+            foundAsesroCurso.setCurso(asesorCurso.getCurso());
+        }
+        if(asesorCurso.getAsesor()!=null){
+            foundAsesroCurso.setAsesor(asesorCurso.getAsesor());
+        }
+
+        AsesorCurso newAsesorCurso = asesorCursoService.save(foundAsesroCurso);
         return new ResponseEntity<AsesorCurso>(newAsesorCurso, HttpStatus.OK);
     }
     //eliminar

@@ -72,6 +72,10 @@ public class AsesorController {
         if (asesor.getAsesorias()!=null) {
             foundAsesor.setAsesorias(asesor.getAsesorias());
         }
+        if (asesor.getUser()!=null) {
+            foundAsesor.setUser(asesor.getUser());
+        }
+
         Asesor newAsesor = asesorService.save(foundAsesor);
         return new ResponseEntity<Asesor>(newAsesor, HttpStatus.OK);
     }

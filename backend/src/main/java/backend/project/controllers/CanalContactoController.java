@@ -57,6 +57,9 @@ public class CanalContactoController {
         if (canalContacto.getUrl()!=null) {
             foundCanalContacto.setUrl(canalContacto.getUrl());
         }
+        if (canalContacto.getAsesor()!=null) {
+            foundCanalContacto.setAsesor(canalContacto.getAsesor());
+        }
         CanalContacto newCanalContacto = canalContactoService.save(foundCanalContacto);
         return new ResponseEntity<CanalContacto>(newCanalContacto, HttpStatus.OK);
     }

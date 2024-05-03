@@ -59,7 +59,14 @@ public class AlumnoCursoController {
     //modificar
     @PutMapping("/alumno_curso/{id}")
     public ResponseEntity<AlumnoCurso> updateAlumnoCurso(@RequestBody AlumnoCurso alumnoCurso, @PathVariable("id") Long id) {
-        AlumnoCurso newAlumnoCurso = alumnoCursoService.save(alumnoCurso);
+        AlumnoCurso foundAlumnoCurso = alumnoCursoService.findById(id);
+        if (alumnoCurso.getAlumno()!=null) {
+            foundAlumnoCurso.setAlumno(alumnoCurso.getAlumno());
+        }
+        if (alumnoCurso.getCurso()!=null) {
+            foundAlumnoCurso.setCurso(alumnoCurso.getCurso());
+        }
+        AlumnoCurso newAlumnoCurso = alumnoCursoService.save(foundAlumnoCurso);
         return new ResponseEntity<AlumnoCurso>(newAlumnoCurso, HttpStatus.OK);
     }
     //eliminar
