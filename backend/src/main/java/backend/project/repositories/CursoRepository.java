@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 public interface CursoRepository extends JpaRepository<Curso, Long> {
+    List<Curso> findByNombreContaining(String nombre);
 }
