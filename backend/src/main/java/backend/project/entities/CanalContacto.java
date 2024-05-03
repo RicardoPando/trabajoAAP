@@ -22,6 +22,6 @@ public class CanalContacto {
     private String url;
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "canal_contacto")
+    @JoinColumn(name = "asesor_id")
     private Asesor asesor;
 }
