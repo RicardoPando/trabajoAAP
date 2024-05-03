@@ -50,17 +50,6 @@ public class AsesorCursoServiceImpl implements AsesorCursoService{
         return asesorCursos;
     }
     @Override
-    public List<AsesorCurso> listByNivelDominio(Integer nivelDominio) {
-        List<AsesorCurso> asesorCursos = asesorCursoRepository.findAllByNivelDominio(nivelDominio);
-        for (AsesorCurso ep: asesorCursos) {
-            //elimina la bidireccionalidad
-            ep.getAsesor().setAsesorCursos(null);
-            ep.getCurso().setAsesorCursos(null);
-        }
-        return asesorCursos;
-    }
-
-    @Override
     public List<Asesor> findAsesor_ByCurso_Id(Long id) {
         List<AsesorCurso> asesorCursos = asesorCursoRepository.findByCurso_Id(id);
         List<Asesor> asesorList = new ArrayList<>();
