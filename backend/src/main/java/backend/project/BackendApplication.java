@@ -2,6 +2,7 @@ package backend.project;
 
 import backend.project.entities.*;
 import backend.project.repositories.*;
+import backend.project.services.*;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -37,8 +38,15 @@ public class BackendApplication {
 			UserRepository userRepository,
 			OpinionRepository opinionRepository,
 			CanalContactoRepository canalContactoRepository,
+			CursoRepository cursoRepository,
+			AlumnoRepository alumnoRepository,
+			AsesorRepository asesorRepository,
 			HorarioRepository horarioRepository,
-			AsesoriaRepository asesoriaRepository
+			AsesoriaRepository asesoriaRepository,
+			AlumnoCursoRepository alumnoCursoRepository,
+			AsesorCursoRepository asesorCursoRepository,
+			AlumnoCursoService alumnoCursoService,
+			AsesorCursoService asesorCursoService
 	) {
 		return args -> {
             //CRUD
@@ -54,6 +62,7 @@ public class BackendApplication {
 							new Authority(AuthorityName.WRITE)
 					)
 			);
+			
 
 
 			userRepository.save(
