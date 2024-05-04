@@ -42,6 +42,9 @@ public class BackendApplication {
 	) {
 		return args -> {
             //CRUD
+			asesoriaRepository.save(new Asesoria(AsesoriaEstado.CANCELADA));
+			asesoriaRepository.save(new Asesoria(AsesoriaEstado.REALIZADA));
+			asesoriaRepository.save(new Asesoria(AsesoriaEstado.RESERVADA));
 
 			authorityRepository.save(new Authority(AuthorityName.ROLE_ADMIN));
 			authorityRepository.save(new Authority(AuthorityName.ROLE_STUDENT));

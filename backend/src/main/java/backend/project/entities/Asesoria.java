@@ -43,5 +43,8 @@ public class Asesoria {
     @JoinColumn(name = "curso_id", nullable = true)
     private Curso curso;
 
+    public Asesoria(AsesoriaEstado asesoriaEstado) {
+        this.estado = asesoriaEstado;
+    }
 }
 
