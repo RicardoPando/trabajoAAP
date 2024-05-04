@@ -64,7 +64,6 @@ public class BackendApplication {
 			);
 			
 
-
 			userRepository.save(
 					new User("gmorip", new BCryptPasswordEncoder().encode("UPC2023!"),true,new Date(),
 							List.of(
