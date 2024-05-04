@@ -23,7 +23,7 @@ public class Alumno {
     //clase alumno
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id",nullable = false)
+    @JoinColumn(name = "user_id",nullable = true)
     private User user;
 
     @JsonIgnore

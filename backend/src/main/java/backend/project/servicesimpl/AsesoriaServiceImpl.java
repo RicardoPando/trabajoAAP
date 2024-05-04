@@ -2,6 +2,7 @@ package backend.project.servicesimpl;
 import backend.project.dtos.DTOAsesoriaSummary;
 import backend.project.entities.*;
 import backend.project.exceptions.IncompleteDataException;
+import backend.project.exceptions.KeyRepeatedDataException;
 import backend.project.exceptions.ResourceNotFoundException;
 import backend.project.repositories.*;
 import backend.project.services.AsesoriaService;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 @Service
-public class AsesoriaServiceImpl implements AsesoriaService{
+public class AsesoriaServiceImpl implements AsesoriaService {
     @Autowired
     AlumnoRepository alumnoRepository;
     @Autowired
@@ -28,10 +29,11 @@ public class AsesoriaServiceImpl implements AsesoriaService{
     public List<Asesoria> listAll() {
         return asesoriaRepository.findAll();
     }
+
     @Override
     public List<Asesoria> findByAlumno_Id(Long id) {
         List<Asesoria> asesorias = asesoriaRepository.findByAlumno_Id(id);
-        for (Asesoria a: asesorias) {
+        for (Asesoria a : asesorias) {
             //elimina la bidireccionalidad
             a.getAsesor().setAsesorias(null);
             a.getCurso().setAsesorias(null);
@@ -39,10 +41,11 @@ public class AsesoriaServiceImpl implements AsesoriaService{
         }
         return asesorias;
     }
+
     @Override
     public List<Asesoria> findByAsesor_Id(Long id) {
         List<Asesoria> asesorias = asesoriaRepository.findByAsesor_Id(id);
-        for (Asesoria a: asesorias) {
+        for (Asesoria a : asesorias) {
             //elimina la bidireccionalidad
             a.getAsesor().setAsesorias(null);
             a.getCurso().setAsesorias(null);
@@ -50,10 +53,11 @@ public class AsesoriaServiceImpl implements AsesoriaService{
         }
         return asesorias;
     }
+
     @Override
     public List<Asesoria> findByCurso_Id(Long id) {
         List<Asesoria> asesorias = asesoriaRepository.findByCurso_Id(id);
-        for (Asesoria a: asesorias) {
+        for (Asesoria a : asesorias) {
             //elimina la bidireccionalidad
             a.getAsesor().setAsesorias(null);
             a.getCurso().setAsesorias(null);
@@ -61,16 +65,25 @@ public class AsesoriaServiceImpl implements AsesoriaService{
         }
         return asesorias;
     }
+
     @Override
     public Asesoria findById(Long id) {
         Asesoria asesoriaFound = asesoriaRepository.findById(id).orElse(null);
         if (asesoriaFound == null) {
-            throw new ResourceNotFoundException("There are no Asesoria with the id: "+String.valueOf(id));
+            throw new ResourceNotFoundException("There are no Asesoria with the id: " + String.valueOf(id));
         }
         return asesoriaFound;
     }
+    public Boolean estaEnRango(Date inicio, Date fin, Date newInicio){
+        if(inicio.compareTo(newInicio)<=0 && newInicio.compareTo(fin)<=0)
+        {
+            return true;
+        }
+        return false;
+    }
     @Override
     public Asesoria save(Asesoria asesoria) {
+        List<Asesoria> asesorias = asesoriaRepository.findByAsesor_Id(asesoria.getAsesor().getId());
 
         Alumno alumno = alumnoRepository.findById(asesoria.getAlumno().getId()).get();
         Curso curso = cursoRepository.findById(asesoria.getCurso().getId()).get();
@@ -78,11 +91,23 @@ public class AsesoriaServiceImpl implements AsesoriaService{
         asesoria.setAlumno(alumno);
         asesoria.setCurso(curso);
         asesoria.setAsesor(asesor);
-        Asesoria newAsesoria=asesoriaRepository.save(asesoria);
+
+        //asesorias.add(asesoria);
+
+        if (asesorias.size()>1){
+            for (Asesoria a : asesorias) {
+                if ( asesoria.getFechaRealizado().equals(a.getFechaRealizado()) &&
+                            estaEnRango(a.getHoraInicio(),a.getHoraFin(),asesoria.getHoraInicio()))
+                {
+                    throw new KeyRepeatedDataException("el asesor ya cuenta con una asesoria con el horario registrada");
+                }
+            }
+        }
+
+        Asesoria newAsesoria = asesoriaRepository.save(asesoria);
         newAsesoria.getAsesor().setHorarios(null);
         newAsesoria.getAsesor().setAsesorias(null);
         newAsesoria.getAsesor().setAsesorCursos(null);
-
         return newAsesoria;
     }
 
@@ -91,7 +116,6 @@ public class AsesoriaServiceImpl implements AsesoriaService{
         Asesoria asesoria = findById(id);
         asesoriaRepository.delete(asesoria);
     }
-
     @Override
     public List<DTOAsesoriaSummary> listAsesoriaSummary(){
         List<Asesoria> asesorias = asesoriaRepository.findAll();

@@ -67,4 +67,5 @@ public class User {
         this.passwordLastUpdate = passwordLastUpdate;
         this.authorities = authorities;
     }
+
 }
