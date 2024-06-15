@@ -113,8 +113,9 @@ public class AsesoriaServiceImpl implements AsesoriaService {
 
     @Override
     public void delete(Long id) {
-        Asesoria asesoria = findById(id);
-        asesoriaRepository.delete(asesoria);
+        Asesoria asesoria = asesoriaRepository.findById(id).orElseThrow(() -> new RuntimeException("Asesoría no encontrada"));
+        asesoria.setEstado(AsesoriaEstado.CANCELADA);
+        asesoriaRepository.save(asesoria);
     }
     @Override
     public List<DTOAsesoriaSummary> listAsesoriaSummary(){
