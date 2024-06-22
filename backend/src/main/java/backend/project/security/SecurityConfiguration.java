@@ -29,6 +29,10 @@ http://localhost:8080/swagger-ui/index.html
             // -- login
             "/api/users/login/**",
             "/api/users/register/**",
+<<<<<<< HEAD
+=======
+          //  "/api/**"
+>>>>>>> master
 
 };
 
@@ -113,6 +117,7 @@ http://localhost:8080/swagger-ui/index.html
 
         http.authorizeHttpRequests( (auth) ->auth
 
+<<<<<<< HEAD
                 .anyRequest().permitAll()
 
 //                .antMatchers(AUTH_WHITELIST).permitAll()
@@ -123,6 +128,19 @@ http://localhost:8080/swagger-ui/index.html
 //                .antMatchers("/api/employees/**").hasAnyAuthority("ROLE_ADMIN")
 //
 //                .anyRequest().authenticated()
+=======
+               // .anyRequest().permitAll()
+
+                .antMatchers(AUTH_WHITELIST).permitAll()
+
+                .antMatchers(HttpMethod.GET,"/api/employees/**").hasAnyAuthority("ROLE_STUDENT", "ROLE_ADMIN")
+
+               // .antMatchers(HttpMethod.GET,"/api/employees").hasAnyRole("STUDENT", "ADMIN")
+
+                .antMatchers("/api/employees/**").hasAnyAuthority("ROLE_ADMIN")
+
+                .anyRequest().authenticated()
+>>>>>>> master
 
         );
 

@@ -26,4 +26,5 @@ public class Horario {
     @JoinColumn(name = "asesor_id", nullable = true)
     private Asesor asesor;
 
+
 }
