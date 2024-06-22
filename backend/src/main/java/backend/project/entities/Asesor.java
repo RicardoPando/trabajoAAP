@@ -17,11 +17,11 @@ import java.util.List;
 public class Asesor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String nombre;
-    private String apellido;
+    private Long    id;
+    private String  nombre;
+    private String  apellido;
     private Integer tarifa;
-    private String experiencia;
+    private String  experiencia;
 
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)

@@ -18,8 +18,8 @@ public class Alumno {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Integer ciclo;
-    private String nombre;
-    private String apellido;
+    private String  nombre;
+    private String  apellido;
     //clase alumno
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
@@ -33,6 +33,5 @@ public class Alumno {
     @JsonIgnore
     @OneToMany(mappedBy = "alumno")
     private List<Asesoria> asesorias;
-
 
 }

@@ -67,6 +67,7 @@ public class AsesoriaServiceImpl implements AsesoriaService{
     }
     @Override
     public Asesoria save(Asesoria asesoria) {
+<<<<<<< Updated upstream
 //        Alumno alumno = alumnoRepository.findById(asesoria.getAlumno().getId()).get();
 //        Curso curso = cursoRepository.findById(asesoria.getCurso().getId()).get();
 //        Asesor asesor = asesorRepository.findById(asesoria.getAsesor().getId()).get();
@@ -74,6 +75,33 @@ public class AsesoriaServiceImpl implements AsesoriaService{
 //        asesoria.setCurso(curso);
 //        asesoria.setAsesor(asesor);
         return asesoriaRepository.save(asesoria);
+=======
+        List<Asesoria> asesorias = asesoriaRepository.findByAsesor_Id(asesoria.getAsesor().getId());
+
+        Alumno alumno = alumnoRepository.findById(asesoria.getAlumno().getId()).get();
+        Curso curso = cursoRepository.findById(asesoria.getCurso().getId()).get();
+        Asesor asesor = asesorRepository.findById(asesoria.getAsesor().getId()).get();
+        asesoria.setAlumno(alumno);
+        asesoria.setCurso(curso);
+        asesoria.setAsesor(asesor);
+
+        //asesorias.add(asesoria);
+
+        if (asesorias.size()>1){
+            for (Asesoria a : asesorias) {
+                    if ( asesoria.getFechaRealizado().equals(a.getFechaRealizado()) &&
+                            estaEnRango(a.getHoraInicio(),a.getHoraFin(),asesoria.getHoraInicio()))
+                {
+                    throw new KeyRepeatedDataException("el asesor ya cuenta con una asesoria con el horario registrada");
+                }
+            }
+        }
+        Asesoria newAsesoria = asesoriaRepository.save(asesoria);
+        newAsesoria.getAsesor().setHorarios(null);
+        newAsesoria.getAsesor().setAsesorias(null);
+        newAsesoria.getAsesor().setAsesorCursos(null);
+        return newAsesoria;
+>>>>>>> Stashed changes
     }
 
     @Override
