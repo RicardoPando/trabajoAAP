@@ -2,6 +2,7 @@ package backend.project;
 
 import backend.project.entities.*;
 import backend.project.repositories.*;
+import backend.project.services.*;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -11,9 +12,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import javax.persistence.Id;
 import javax.print.attribute.DateTimeSyntax;
 import java.sql.Time;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
@@ -28,17 +31,18 @@ public class BackendApplication {
 
 	@Bean
 	public CommandLineRunner mappingDemo(
-			/*EmployeeRepository employeeRepository,
-			ProjectRepository projectRepository,
-			EmployeeProjectRepository employeeProjectRepository,
-			EmployeeProjectService employeeProjectService,*/
 
 			AuthorityRepository authorityRepository,
 			UserRepository userRepository,
-			OpinionRepository opinionRepository,
+			AlumnoRepository alumnoRepository,
+			AsesorRepository asesorRepository,
+			CursoRepository cursoRepository,
 			CanalContactoRepository canalContactoRepository,
 			HorarioRepository horarioRepository,
-			AsesoriaRepository asesoriaRepository
+			AsesoriaRepository asesoriaRepository,
+			OpinionRepository opinionRepository,
+			AlumnoCursoService alumnoCursoService,
+			AsesorCursoService asesorCursoService
 	) {
 		return args -> {
             //CRUD
@@ -73,149 +77,66 @@ public class BackendApplication {
 					new User("crevilla", new BCryptPasswordEncoder().encode("DISEÑOPERU18!"),true,new Date(),
 							List.of(
 									authorityRepository.findByName(AuthorityName.ROLE_STUDENT),
-									authorityRepository.findByName(AuthorityName.READ)
+									authorityRepository.findByName(AuthorityName.READ),
+									authorityRepository.findByName(AuthorityName.WRITE)
+
+							)
+					)
+			);
+
+			userRepository.save(
+					new User("uriel123", new BCryptPasswordEncoder().encode("lerma123"),true,new Date(),
+							List.of(
+									authorityRepository.findByName(AuthorityName.ROLE_STUDENT),
+									authorityRepository.findByName(AuthorityName.ROLE_TEACHER),
+									authorityRepository.findByName(AuthorityName.READ),
+									authorityRepository.findByName(AuthorityName.WRITE)
+							)
+					)
+			);
+
+			userRepository.save(
+					new User("rycon", new BCryptPasswordEncoder().encode("armando200"),true,new Date(),
+							List.of(
+									authorityRepository.findByName(AuthorityName.ROLE_STUDENT),
+									authorityRepository.findByName(AuthorityName.ROLE_TEACHER),
+									authorityRepository.findByName(AuthorityName.READ),
+									authorityRepository.findByName(AuthorityName.WRITE)
 							)
 					)
 			);
 
 
-			//guardar las opiniones
-			Opinion opinion = opinionRepository.save(new Opinion(Long.valueOf(0), new Date(2021/1/1),"hola",null));
 
-			//listar todas las opiniones
-			List<Opinion> opinions = opinionRepository.findAll();
-			System.out.println("\nLista Completa");
-			for(Opinion e: opinions) {
-				System.out.println(e);
-			}
+			alumnoRepository.save( new Alumno(Long.valueOf(0),5,"Ricardo","Pando", userRepository.findByUserName("rycon"),null,null));
+			alumnoRepository.save( new Alumno(Long.valueOf(0),8,"Uriel","Parra", userRepository.findByUserName("uriel123"),null,null));
+			alumnoRepository.save( new Alumno(Long.valueOf(0),3,"Jhon","Salchi", userRepository.findByUserName("crevilla"),null,null));
 
-			CanalContacto canalContacto = canalContactoRepository.save(new CanalContacto(Long.valueOf(0),"987654321","josue@gmail","josuemoreira","ww.josue.com",null));
+			asesorRepository.save(new Asesor(Long.valueOf(0),"Ricardo","Pando",40,"Mucha",userRepository.findByUserName("rycon"),null,null,null,null));
+			asesorRepository.save(new Asesor(Long.valueOf(0),"Uriel","Parra",13,"Poca",userRepository.findByUserName("uriel123"),null,null,null,null));
+			asesorRepository.save(new Asesor(Long.valueOf(0),"Jhon","Salchi",20,"Algo",userRepository.findByUserName("crevilla"),null,null,null,null));
 
-			Horario horario = horarioRepository.save(new Horario(Long.valueOf(0), "lunes",Time.valueOf(LocalTime.of(10,20,10)),Time.valueOf(LocalTime.of(11,20,10)),null ));
+			cursoRepository.save(new Curso(Long.valueOf(0),"matematica",5,null,null,null));
+			cursoRepository.save(new Curso(Long.valueOf(0),"lengua",3,null,null,null));
+			cursoRepository.save(new Curso(Long.valueOf(0),"fisica",1,null,null,null));
+			cursoRepository.save(new Curso(Long.valueOf(0),"progra",2,null,null,null));
 
-			Asesoria asesoria = asesoriaRepository.save(new Asesoria(Long.valueOf(0),new Date(2021/1/1),100.00,new Date(2021/1/2),null,null,null,null,null,null,null,
-			null,null,null));
+			canalContactoRepository.save(new CanalContacto(Long.valueOf(0),"999784561","prefomasna@upc.edu.pe","https://pe.linkedin.com/in/urielito","www.kick.com",asesorRepository.findByNombreContaining("Uriel").get(0)));
+			canalContactoRepository.save(new CanalContacto(Long.valueOf(0),"915961599","masnaprof@upc.edu.pe","https://pe.linkedin.com/in/fqwfqwfqqq","www.patada.com",asesorRepository.findByNombreContaining("Jhon").get(0)));
+			canalContactoRepository.save(new CanalContacto(Long.valueOf(0),"989595489","mostro@upc.edu.pe","https://pe.linkedin.com/in/paginaxd","www.patadacoladora.com",asesorRepository.findByNombreContaining("Ricardo").get(0)));
 
+			horarioRepository.save(new Horario(Long.valueOf(0),"Lunes",Time.valueOf("09:00:00"),Time.valueOf("10:00:00"),asesorRepository.findByNombreContaining("Ricardo").get(0)));
+			horarioRepository.save(new Horario(Long.valueOf(0),"Martes",Time.valueOf("07:00:00"),Time.valueOf("10:00:00"),asesorRepository.findByNombreContaining("Uriel").get(0)));
+			horarioRepository.save(new Horario(Long.valueOf(0),"Miercoles",Time.valueOf("10:00:00"),Time.valueOf("13:00:00"),asesorRepository.findByNombreContaining("Jhon").get(0)));
 
+			SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+			asesoriaRepository.save(new Asesoria(Long.valueOf(0),dateFormat.parse("2024-10-24"),12.50,dateFormat.parse("2024-10-26"),3,3,AsesoriaEstado.REALIZADA,Time.valueOf("10:00:00"),Time.valueOf("11:00:00"),1,12.50,alumnoRepository.findByNombreContaining("Uriel").get(0),asesorRepository.findByNombreContaining("Ricardo").get(0),cursoRepository.findByNombreContaining("matematica").get(0)));
+			asesoriaRepository.save(new Asesoria(Long.valueOf(0),dateFormat.parse("2024-10-23"),12.50,dateFormat.parse("2024-10-25"),4,2,AsesoriaEstado.CANCELADA,Time.valueOf("10:00:00"),Time.valueOf("11:00:00"),1,12.50,alumnoRepository.findByNombreContaining("Jhon").get(0),asesorRepository.findByNombreContaining("Ricardo").get(0),cursoRepository.findByNombreContaining("lengua").get(0)));
+			asesoriaRepository.save(new Asesoria(Long.valueOf(0),dateFormat.parse("2024-10-22"),12.50,dateFormat.parse("2024-10-28"),5,3,AsesoriaEstado.RESERVADA,Time.valueOf("10:00:00"),Time.valueOf("11:00:00"),1,12.50,alumnoRepository.findByNombreContaining("Uriel").get(0),asesorRepository.findByNombreContaining("Ricardo").get(0),cursoRepository.findByNombreContaining("progra").get(0)));
 
-			/*Employee employeeSaved = employeeRepository.save(new Employee(Long.valueOf(0),"Cinthy","Lima",15000.0,null));
-			employeeRepository.save(new Employee(Long.valueOf(0),"Gonzalo","Lima",15000.0,null));
-			employeeRepository.save(new Employee(Long.valueOf(0),"Gladys","Cuzco",5000.0,null));
-			employeeRepository.save(new Employee(Long.valueOf(0),"Walter","Lima",9000.0,null));
-			employeeRepository.save(new Employee(Long.valueOf(0),"Emma","Lima",10000.0,null));
-			employeeRepository.save(new Employee(Long.valueOf(0),"Ana Paula","Piura",1300.0,null));
-			employeeRepository.save(new Employee(Long.valueOf(0),"Regina","Tacna",12000.0,null));
-			employeeRepository.save(new Employee(Long.valueOf(0),"Pilar","Piura",3000.0,null));
-
-			employeeSaved.setCity("Arequipa");
-			employeeSaved.setSalary(18000.0);
-			employeeRepository.save(employeeSaved);
-
-			employeeRepository.delete(employeeSaved);
-*/
-			//Un solo objeto como resultado
-
-			/*Employee employeeFound = employeeRepository.findById(Long.valueOf(3)).get();
-
-			//Una lista de objetos como resultado
-
-			List<Employee> employeeAll = employeeRepository.findAll();
-			System.out.println("\nLista Completa");
-			for(Employee e: employeeAll) {
-				System.out.println(e);
-			}
-
-			System.out.println("\nLista por Ciudad");
-			List<Employee> employeeCiudad= employeeRepository.findByCityOrderByNameDesc("Lima");
-			for(Employee e: employeeCiudad) {
-				System.out.println(e);
-			}
-
-			System.out.println("\nLista por Ciudad y Nombre");
-			List<Employee> employeeCiudadNombre = employeeRepository.findByCityAndName("Lima","Gonzalo");
-			for(Employee e: employeeCiudadNombre) {
-				System.out.println(e);
-			}
-
-
-			System.out.println("\nLista por similitud Nombre");
-			List<Employee> employeeNombreParecido = employeeRepository.findByNameContaining("G");
-			for(Employee e: employeeNombreParecido) {
-				System.out.println(e);
-			}
-
-			System.out.println("\nLista por Ciudad y Menor Salario");
-			//List<Employee> employeeCiudadMenorSalario = employeeRepository.findByCityAndLowerSalary("Lima", 10000.0);
-			//List<Employee> employeeCiudadMenorSalario = employeeRepository.findByCityAndSalaryLessThan("Lima", 10000.0);
-			List<Employee> employeeCiudadMenorSalario = employeeRepository.findByCityAndLowerSalaryJPQL("Lima", 10000.0);
-			for(Employee e: employeeCiudadMenorSalario) {
-				System.out.println(e);
-			}
-
-			System.out.println("\nLista por Rango Salario");
-			List<Employee> employeeRangoSalario = employeeRepository.findBySalaryBetween(1000.0, 10000.0);
-			for(Employee e: employeeRangoSalario) {
-				System.out.println(e);
-			}*/
-
-			//UPDATE ERROR COMUN
-			//Ejemplo: Cuando te pasan un ID y el nuevo salario
-			//Version que elimina datos equivocadamente
-			/*
-			Long idEmployeePromoted = Long.valueOf(8);
-			Double newSalaryEmployeePromoted = 5000.0;
-
-			Employee e = new Employee();
-			e.setSalary(newSalaryEmployeePromoted);
-			e.setId(idEmployeePromoted);
-			Employee employeePromoted =  employeeRepository.save(e);
-			System.out.println("\n"+employeePromoted);
-			*/
-			//Version que es la correcta
-			/*Long idEmployeePromoted = Long.valueOf(8);
-			Double newSalaryEmployeePromoted = 5000.0;
-			Employee e = employeeRepository.findById(idEmployeePromoted).get();
-			e.setSalary(newSalaryEmployeePromoted);
-			e.setId(idEmployeePromoted);
-			Employee employeePromoted =  employeeRepository.save(e);
-			System.out.println("\n"+employeePromoted);
-
-
-			//*** PROJECT *** /
-			projectRepository.save(new Project(Long.valueOf(0),"Frontend RRHH", 17500.0,null));
-			projectRepository.save(new Project(Long.valueOf(0),"Backend RRHH", 25000.0,null));
-			projectRepository.save(new Project(Long.valueOf(0),"Security Check 2023", 7000.0,null));
-
-			Project project1 = projectRepository.findById(Long.valueOf(1)).get();
-			Project project2 = projectRepository.findById(Long.valueOf(2)).get();
-
-			Employee employee1 = employeeRepository.findById(Long.valueOf(2)).get();
-			Employee employee2 = employeeRepository.findById(Long.valueOf(4)).get();
-			Employee employee3 = employeeRepository.findById(Long.valueOf(6)).get();
-			Employee employee4 = employeeRepository.findById(Long.valueOf(7)).get();
-			Employee employee5 = employeeRepository.findById(Long.valueOf(8)).get();
-
-
-			employeeProjectRepository.save(new EmployeeProject(Long.valueOf(0), project1, employee1, 14, false));
-			employeeProjectRepository.save(new EmployeeProject(Long.valueOf(0), project1, employee3, 10, true));
-			employeeProjectRepository.save(new EmployeeProject(Long.valueOf(0), project1, employee5, 9, false));
-			employeeProjectRepository.save(new EmployeeProject(Long.valueOf(0), project2, employee1, 28, true));
-			employeeProjectRepository.save(new EmployeeProject(Long.valueOf(0), project2, employee2, 15, false));
-			employeeProjectRepository.save(new EmployeeProject(Long.valueOf(0), project2, employee3, 4, true));
-			employeeProjectRepository.save(new EmployeeProject(Long.valueOf(0), project2, employee4, 18, true));
-			employeeProjectRepository.save(new EmployeeProject(Long.valueOf(0), project2, employee5, 9, false));
-
-
-			System.out.println("-------------");
-
-			List<EmployeeProject> employeeProjectList = employeeProjectService.listAll();
-			for (EmployeeProject ep: employeeProjectList) {
-				System.out.println(ep);
-			}*/
-
-
-
-
+			opinionRepository.save(new Opinion(Long.valueOf(0),dateFormat.parse("2024-10-22"),"a bueno",userRepository.findByUserName("Ricardo")));
+			opinionRepository.save(new Opinion(Long.valueOf(0),dateFormat.parse("2024-10-20"),"a malo",userRepository.findByUserName("Uriel")));
+			opinionRepository.save(new Opinion(Long.valueOf(0),dateFormat.parse("2024-10-19"),"mas o menos",userRepository.findByUserName("Jhon")));
 
 
 

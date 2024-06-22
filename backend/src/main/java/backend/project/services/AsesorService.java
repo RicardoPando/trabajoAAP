@@ -7,6 +7,7 @@ public interface AsesorService {
     public List<Asesor> listByName(String name);
 
     public Asesor findById(Long id);
+    public Asesor findByNombreContaining(String nombre);
 
     public Asesor save(Asesor asesor);
     public void delete(Long id);
