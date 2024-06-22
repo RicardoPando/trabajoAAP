@@ -1,7 +1,6 @@
 package backend.project.servicesimpl;
 import backend.project.dtos.DTOAsesoriaSummary;
 import backend.project.entities.*;
-import backend.project.exceptions.IncompleteDataException;
 import backend.project.exceptions.KeyRepeatedDataException;
 import backend.project.exceptions.ResourceNotFoundException;
 import backend.project.repositories.*;
@@ -83,6 +82,9 @@ public class AsesoriaServiceImpl implements AsesoriaService {
     }
     @Override
     public Asesoria save(Asesoria asesoria) {
+
+
+
         List<Asesoria> asesorias = asesoriaRepository.findByAsesor_Id(asesoria.getAsesor().getId());
 
         Alumno alumno = alumnoRepository.findById(asesoria.getAlumno().getId()).get();
@@ -97,13 +99,13 @@ public class AsesoriaServiceImpl implements AsesoriaService {
         if (asesorias.size()>1){
             for (Asesoria a : asesorias) {
                 if ( asesoria.getFechaRealizado().equals(a.getFechaRealizado()) &&
+
                             estaEnRango(a.getHoraInicio(),a.getHoraFin(),asesoria.getHoraInicio()))
                 {
                     throw new KeyRepeatedDataException("el asesor ya cuenta con una asesoria con el horario registrada");
                 }
             }
         }
-
         Asesoria newAsesoria = asesoriaRepository.save(asesoria);
         newAsesoria.getAsesor().setHorarios(null);
         newAsesoria.getAsesor().setAsesorias(null);
