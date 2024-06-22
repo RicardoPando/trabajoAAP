@@ -1,7 +1,6 @@
 package backend.project.servicesimpl;
 import backend.project.dtos.DTOAsesoriaSummary;
 import backend.project.entities.*;
-import backend.project.exceptions.IncompleteDataException;
 import backend.project.exceptions.KeyRepeatedDataException;
 import backend.project.exceptions.ResourceNotFoundException;
 import backend.project.repositories.*;
@@ -83,18 +82,9 @@ public class AsesoriaServiceImpl implements AsesoriaService {
     }
     @Override
     public Asesoria save(Asesoria asesoria) {
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-//        Alumno alumno = alumnoRepository.findById(asesoria.getAlumno().getId()).get();
-//        Curso curso = cursoRepository.findById(asesoria.getCurso().getId()).get();
-//        Asesor asesor = asesorRepository.findById(asesoria.getAsesor().getId()).get();
-//        asesoria.setAlumno(alumno);
-//        asesoria.setCurso(curso);
-//        asesoria.setAsesor(asesor);
-        return asesoriaRepository.save(asesoria);
-=======
-=======
->>>>>>> master
+
+
+
         List<Asesoria> asesorias = asesoriaRepository.findByAsesor_Id(asesoria.getAsesor().getId());
 
         Alumno alumno = alumnoRepository.findById(asesoria.getAlumno().getId()).get();
@@ -108,30 +98,19 @@ public class AsesoriaServiceImpl implements AsesoriaService {
 
         if (asesorias.size()>1){
             for (Asesoria a : asesorias) {
-<<<<<<< HEAD
-                    if ( asesoria.getFechaRealizado().equals(a.getFechaRealizado()) &&
-=======
                 if ( asesoria.getFechaRealizado().equals(a.getFechaRealizado()) &&
->>>>>>> master
+
                             estaEnRango(a.getHoraInicio(),a.getHoraFin(),asesoria.getHoraInicio()))
                 {
                     throw new KeyRepeatedDataException("el asesor ya cuenta con una asesoria con el horario registrada");
                 }
             }
         }
-<<<<<<< HEAD
-=======
-
->>>>>>> master
         Asesoria newAsesoria = asesoriaRepository.save(asesoria);
         newAsesoria.getAsesor().setHorarios(null);
         newAsesoria.getAsesor().setAsesorias(null);
         newAsesoria.getAsesor().setAsesorCursos(null);
         return newAsesoria;
-<<<<<<< HEAD
->>>>>>> Stashed changes
-=======
->>>>>>> master
     }
 
     @Override
