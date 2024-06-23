@@ -53,7 +53,6 @@ public class AsesoriaServiceImpl implements AsesoriaService {
         }
         return asesorias;
     }
-
     @Override
     public List<Asesoria> findByCurso_Id(Long id) {
         List<Asesoria> asesorias = asesoriaRepository.findByCurso_Id(id);
@@ -83,19 +82,16 @@ public class AsesoriaServiceImpl implements AsesoriaService {
     }
     @Override
     public Asesoria save(Asesoria asesoria) {
-//        if (asesoria.getAsesor() == null) {
-//            throw new IllegalArgumentException("El asesor no puede ser null y debe tener un ID válido.");
-//        }
+
         List<Asesoria> asesorias = asesoriaRepository.findByAsesor_Id(asesoria.getAsesor().getId());
 
         Alumno alumno = alumnoRepository.findById(asesoria.getAlumno().getId()).get();
         Curso curso = cursoRepository.findById(asesoria.getCurso().getId()).get();
-        Asesor asesor = asesorRepository.findById(Long.valueOf(1)).get();
+        Asesor asesor = asesorRepository.findById(asesoria.getAsesor().getId()).get();
+
         asesoria.setAlumno(alumno);
         asesoria.setCurso(curso);
         asesoria.setAsesor(asesor);
-
-        //asesorias.add(asesoria);
 
         if (asesorias.size()>1){
             for (Asesoria a : asesorias) {
@@ -111,7 +107,7 @@ public class AsesoriaServiceImpl implements AsesoriaService {
         newAsesoria.getAsesor().setHorarios(null);
         newAsesoria.getAsesor().setAsesorias(null);
         newAsesoria.getAsesor().setAsesorCursos(null);
-        return newAsesoria;
+        return asesoriaRepository.save(asesoria);
     }
 
     @Override

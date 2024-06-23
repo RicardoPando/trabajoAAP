@@ -17,6 +17,7 @@ public class Asesoria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private Date fechaRegistro;
     private Double tarifaPactadas;
     private Date fechaRealizado;
@@ -28,17 +29,15 @@ public class Asesoria {
     private Integer duracion;
     private Double montoCobrado;
 
-    @JsonIgnore
+
     @ManyToOne
     @JoinColumn(name = "alumno_id", nullable = true)
     private Alumno alumno;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "asesor_id", nullable = true)
     private Asesor asesor;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "curso_id", nullable = true)
     private Curso curso;
