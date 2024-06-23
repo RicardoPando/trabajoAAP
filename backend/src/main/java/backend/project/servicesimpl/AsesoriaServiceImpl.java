@@ -83,11 +83,14 @@ public class AsesoriaServiceImpl implements AsesoriaService {
     }
     @Override
     public Asesoria save(Asesoria asesoria) {
+//        if (asesoria.getAsesor() == null) {
+//            throw new IllegalArgumentException("El asesor no puede ser null y debe tener un ID válido.");
+//        }
         List<Asesoria> asesorias = asesoriaRepository.findByAsesor_Id(asesoria.getAsesor().getId());
 
         Alumno alumno = alumnoRepository.findById(asesoria.getAlumno().getId()).get();
         Curso curso = cursoRepository.findById(asesoria.getCurso().getId()).get();
-        Asesor asesor = asesorRepository.findById(asesoria.getAsesor().getId()).get();
+        Asesor asesor = asesorRepository.findById(Long.valueOf(1)).get();
         asesoria.setAlumno(alumno);
         asesoria.setCurso(curso);
         asesoria.setAsesor(asesor);

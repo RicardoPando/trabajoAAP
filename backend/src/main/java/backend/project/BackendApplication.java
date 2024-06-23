@@ -122,9 +122,10 @@ public class BackendApplication {
 			canalContactoRepository.save(new CanalContacto(Long.valueOf(0),"915961599","masnaprof@upc.edu.pe","https://pe.linkedin.com/in/fqwfqwfqqq","www.patada.com",asesorRepository.findByNombreContaining("Jhon").get(0)));
 			canalContactoRepository.save(new CanalContacto(Long.valueOf(0),"989595489","mostro@upc.edu.pe","https://pe.linkedin.com/in/paginaxd","www.patadacoladora.com",asesorRepository.findByNombreContaining("Ricardo").get(0)));
 
-			horarioRepository.save(new Horario(Long.valueOf(0),"Lunes",Time.valueOf("09:00:00"),Time.valueOf("10:00:00"),asesorRepository.findByNombreContaining("Ricardo").get(0)));
-			horarioRepository.save(new Horario(Long.valueOf(0),"Martes",Time.valueOf("07:00:00"),Time.valueOf("10:00:00"),asesorRepository.findByNombreContaining("Uriel").get(0)));
-			horarioRepository.save(new Horario(Long.valueOf(0),"Miercoles",Time.valueOf("10:00:00"),Time.valueOf("13:00:00"),asesorRepository.findByNombreContaining("Jhon").get(0)));
+			horarioRepository.save(new Horario(Long.valueOf(0),"Lunes",LocalTime.parse("09:00:00"),LocalTime.parse("10:00:00"),asesorRepository.findByNombreContaining("Ricardo").get(0)));
+			horarioRepository.save(new Horario(Long.valueOf(0),"Martes",LocalTime.parse("07:00:00"),LocalTime.parse("10:00:00"),asesorRepository.findByNombreContaining("Uriel").get(0)));
+			horarioRepository.save(new Horario(Long.valueOf(0),"Miercoles",LocalTime.parse("10:00:00"),LocalTime.parse("13:00:00"),asesorRepository.findByNombreContaining("Jhon").get(0)));
+			horarioRepository.save(new Horario(Long.valueOf(0),"Jueves",LocalTime.parse("10:00:00"),LocalTime.parse("13:00:00"),asesorRepository.findByNombreContaining("Uriel").get(0)));
 
 			SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
 			asesoriaRepository.save(new Asesoria(Long.valueOf(0),dateFormat.parse("2024-10-24"),12.50,dateFormat.parse("2024-10-26"),3,3,AsesoriaEstado.REALIZADA,Time.valueOf("10:00:00"),Time.valueOf("11:00:00"),1,12.50,alumnoRepository.findByNombreContaining("Uriel").get(0),asesorRepository.findByNombreContaining("Ricardo").get(0),cursoRepository.findByNombreContaining("matematica").get(0)));
