@@ -6,7 +6,7 @@ public interface CursoService {
     public List<Curso> listAll();
     public List<Curso> listByName(String name);
     public Curso findById(Long id);
-
+    //public List<Curso> findCursosByAsesorId()
     public Curso save(Curso curso);
     public void delete(Long id);
     public Curso update(Long id,Curso curso);

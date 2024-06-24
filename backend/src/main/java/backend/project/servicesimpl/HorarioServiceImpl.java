@@ -53,12 +53,14 @@ public class HorarioServiceImpl implements HorarioService {
 
     @Override
     public Horario save(Horario horario) {
+
         if (horario.getDia()==null || horario.getDia().isEmpty()) {
             throw new IncompleteDataException("Horario dia can not be null or empty");
         }
         List<Horario> horarioList= horarioRepository.findByDia(horario.getDia());
         if (horarioList.size()>1 || (horarioList.size()==1 &&
-                (!horarioList.get(0).getId().equals(horario.getId()) &&(
+                (!horarioList.get(0).getId().equals(horario.getId()) && (
+                        horarioList.get(0).getAsesor().getId().equals(horario.getAsesor().getId()) &&
                         horarioList.get(0).getDia().equals(horario.getDia()) &&
                                 !isNewInicioValid(horarioList.get(0).getHoraInicio(),horarioList.get(0).getHoraFin(),horario.getHoraInicio())
                         )))) {

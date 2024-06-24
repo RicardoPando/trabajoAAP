@@ -66,9 +66,9 @@ public class AsesorCursoController {
         if(asesorCurso.getNivelDominio()!=null){
             foundAsesroCurso.setNivelDominio(asesorCurso.getNivelDominio());
         }
-        if(asesorCurso.getDisponibilidad()!=null){
-            foundAsesroCurso.setDisponibilidad(asesorCurso.getDisponibilidad());
-        }
+//        if(asesorCurso.getDisponibilidad()!=null){
+//            foundAsesroCurso.setDisponibilidad(asesorCurso.getDisponibilidad());
+//        }
         if(asesorCurso.getCurso()!=null){
             foundAsesroCurso.setCurso(asesorCurso.getCurso());
         }

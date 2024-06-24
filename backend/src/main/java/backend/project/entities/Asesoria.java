@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.time.LocalTime;
 import java.util.Date;
 
 @Data
@@ -24,23 +25,19 @@ public class Asesoria {
     private Integer calificacionAsesor;
     private Integer calificacionAlumno;
     private AsesoriaEstado estado;
-    private Time horaInicio;
-    private Time horaFin;
+    private LocalTime horaInicio;
+    private LocalTime horaFin;
     private Integer duracion;
     private Double montoCobrado;
-
 
     @ManyToOne
     @JoinColumn(name = "alumno_id", nullable = true)
     private Alumno alumno;
-
     @ManyToOne
     @JoinColumn(name = "asesor_id", nullable = true)
     private Asesor asesor;
-
     @ManyToOne
     @JoinColumn(name = "curso_id", nullable = true)
     private Curso curso;
-
 }
 

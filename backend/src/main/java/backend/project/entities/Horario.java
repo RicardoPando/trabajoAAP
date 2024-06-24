@@ -23,7 +23,7 @@ public class Horario {
     private LocalTime horaInicio;
     private LocalTime horaFin;
 
-    @JsonIgnore
+
     @ManyToOne
     @JoinColumn(name = "asesor_id", nullable = true)
     private Asesor asesor;
