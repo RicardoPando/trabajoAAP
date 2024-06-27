@@ -20,6 +20,7 @@ public class CanalContacto {
     private String email;
     private String linkedin;
     private String url;
+
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "asesor_id")

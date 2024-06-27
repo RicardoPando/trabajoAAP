@@ -17,14 +17,14 @@ public class AsesorCurso {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Integer nivelDominio;
-    private Date disponibilidad;
+    //private Date disponibilidad;
 
-    @JsonIgnore
+
     @ManyToOne
     @JoinColumn(name = "asesor_id")
     private Asesor asesor;
 
-    @JsonIgnore
+
     @ManyToOne
     @JoinColumn(name = "curso_id")
     private Curso curso;

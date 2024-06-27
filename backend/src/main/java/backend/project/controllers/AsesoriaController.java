@@ -35,7 +35,7 @@ public class AsesoriaController {
     //listar asesoria por id alumno
     @GetMapping("/asesoria/alumno/{id_alumno}")
     public ResponseEntity<List<Asesoria>> getAsesoriaByAlumno_Id(@PathVariable("id_alumno") Long id) {
-        List<Asesoria> asesoriaList = asesoriaService.findByAsesor_Id(id);
+        List<Asesoria> asesoriaList = asesoriaService.findByAlumno_Id(id);
         return new ResponseEntity<List<Asesoria>>(asesoriaList, HttpStatus.OK);
     }
     //listar asesoria por id curso

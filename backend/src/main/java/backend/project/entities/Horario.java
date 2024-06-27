@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.time.LocalTime;
 import java.util.List;
 
 @Data
@@ -19,12 +20,12 @@ public class Horario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String dia;
-    private Time horaInicio;
-    private Time horaFin;
+    private LocalTime horaInicio;
+    private LocalTime horaFin;
+
 
     @ManyToOne
     @JoinColumn(name = "asesor_id", nullable = true)
     private Asesor asesor;
-
 
 }

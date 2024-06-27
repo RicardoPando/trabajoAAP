@@ -17,10 +17,12 @@ public class AlumnoCurso {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "alumno_id")
     private Alumno alumno;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "curso_id")
     private Curso curso;

@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalTime;
 import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -27,6 +28,12 @@ public class HorarioController {
     public ResponseEntity<Horario> geHorarioById(@PathVariable("id") Long id) {
         Horario horario = horarioService.findById(id);
         return new ResponseEntity<Horario>(horario, HttpStatus.OK);
+    }
+    //listar por id de asesor
+    @GetMapping("/horario/asesor/{id}")
+    public ResponseEntity<List<Horario>> getHorariosPorAsesorId(@PathVariable("id") Long id) {
+        List<Horario> horario = horarioService.findByAsesorId(id);
+        return new ResponseEntity<List<Horario>>(horario, HttpStatus.OK);
     }
     //crear
     @PostMapping("/horario")

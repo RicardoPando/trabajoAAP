@@ -1,17 +1,17 @@
 package backend.project.servicesimpl;
 import backend.project.dtos.DTOAsesoriaSummary;
 import backend.project.entities.*;
-import backend.project.exceptions.IncompleteDataException;
-import backend.project.exceptions.KeyRepeatedDataException;
 import backend.project.exceptions.ResourceNotFoundException;
 import backend.project.repositories.*;
 import backend.project.services.AsesoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 @Service
 public class AsesoriaServiceImpl implements AsesoriaService {
     @Autowired
@@ -24,9 +24,13 @@ public class AsesoriaServiceImpl implements AsesoriaService {
     CursoRepository cursoRepository;
     @Autowired
     private OpinionRepository opinionRepository;
+    @Autowired
+    private HorarioRepository horarioRepository;
+
 
     @Override
     public List<Asesoria> listAll() {
+
         return asesoriaRepository.findAll();
     }
 
@@ -53,7 +57,6 @@ public class AsesoriaServiceImpl implements AsesoriaService {
         }
         return asesorias;
     }
-
     @Override
     public List<Asesoria> findByCurso_Id(Long id) {
         List<Asesoria> asesorias = asesoriaRepository.findByCurso_Id(id);
@@ -83,32 +86,45 @@ public class AsesoriaServiceImpl implements AsesoriaService {
     }
     @Override
     public Asesoria save(Asesoria asesoria) {
-        List<Asesoria> asesorias = asesoriaRepository.findByAsesor_Id(asesoria.getAsesor().getId());
+
+        //List<Asesoria> asesorias = asesoriaRepository.findByAsesor_Id(asesoria.getAsesor().getId());
 
         Alumno alumno = alumnoRepository.findById(asesoria.getAlumno().getId()).get();
         Curso curso = cursoRepository.findById(asesoria.getCurso().getId()).get();
         Asesor asesor = asesorRepository.findById(asesoria.getAsesor().getId()).get();
+
+        List<LocalTime> horaInicio = asesor.getHorarios().stream().
+                map(Horario::getHoraInicio).toList();
+
+        List<LocalTime> horaFin = asesor.getHorarios().stream().
+                map(Horario::getHoraFin).toList();
+
+        for(LocalTime hInicio :horaInicio){
+            asesoria.setHoraInicio(hInicio);
+        }
+        for(LocalTime hFin :horaFin){
+            asesoria.setHoraFin(hFin);
+        }
+
         asesoria.setAlumno(alumno);
         asesoria.setCurso(curso);
         asesoria.setAsesor(asesor);
 
-        //asesorias.add(asesoria);
-
-        if (asesorias.size()>1){
-            for (Asesoria a : asesorias) {
-                if ( asesoria.getFechaRealizado().equals(a.getFechaRealizado()) &&
-                            estaEnRango(a.getHoraInicio(),a.getHoraFin(),asesoria.getHoraInicio()))
-                {
-                    throw new KeyRepeatedDataException("el asesor ya cuenta con una asesoria con el horario registrada");
-                }
-            }
-        }
+//        if (asesorias.size()>1){
+//            for (Asesoria a : asesorias) {
+//                if ( asesoria.getFechaRealizado().equals(a.getFechaRealizado()) &&
+//                            estaEnRango(a.getHoraInicio(),a.getHoraFin(),asesoria.getHoraInicio()))
+//                {
+//                    throw new KeyRepeatedDataException("el asesor ya cuenta con una asesoria con el horario registrada");
+//                }
+//            }
+//        }
 
         Asesoria newAsesoria = asesoriaRepository.save(asesoria);
         newAsesoria.getAsesor().setHorarios(null);
         newAsesoria.getAsesor().setAsesorias(null);
         newAsesoria.getAsesor().setAsesorCursos(null);
-        return newAsesoria;
+        return asesoriaRepository.save(asesoria);
     }
 
     @Override
