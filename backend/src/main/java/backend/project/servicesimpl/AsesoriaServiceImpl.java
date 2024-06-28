@@ -93,18 +93,20 @@ public class AsesoriaServiceImpl implements AsesoriaService {
         Curso curso = cursoRepository.findById(asesoria.getCurso().getId()).get();
         Asesor asesor = asesorRepository.findById(asesoria.getAsesor().getId()).get();
 
-        List<LocalTime> horaInicio = asesor.getHorarios().stream().
-                map(Horario::getHoraInicio).toList();
-
-        List<LocalTime> horaFin = asesor.getHorarios().stream().
-                map(Horario::getHoraFin).toList();
-
-        for(LocalTime hInicio :horaInicio){
-            asesoria.setHoraInicio(hInicio);
-        }
-        for(LocalTime hFin :horaFin){
-            asesoria.setHoraFin(hFin);
-        }
+//        List<LocalTime> horaInicio = asesor.getHorarios().stream().
+//                flatMap(horario -> horario.getHorasInicio().stream())
+//                .toList();
+//
+//        List<LocalTime> horaFin = asesor.getHorarios().stream().
+//                flatMap(horario->horario.getHorasFin().stream())
+//                .toList();
+//
+//        for(LocalTime hInicio :horaInicio){
+//            asesoria.getHorasInicio().add(hInicio);
+//        }
+//        for(LocalTime hFin :horaFin){
+//            asesoria.getHorasFin().add(hFin);
+//        }
 
         asesoria.setAlumno(alumno);
         asesoria.setCurso(curso);

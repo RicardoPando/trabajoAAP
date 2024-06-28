@@ -19,6 +19,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -122,15 +123,17 @@ public class BackendApplication {
 			canalContactoRepository.save(new CanalContacto(Long.valueOf(0),"915961599","masnaprof@upc.edu.pe","https://pe.linkedin.com/in/fqwfqwfqqq","www.patada.com",asesorRepository.findByNombreContaining("Jhon").get(0)));
 			canalContactoRepository.save(new CanalContacto(Long.valueOf(0),"989595489","mostro@upc.edu.pe","https://pe.linkedin.com/in/paginaxd","www.patadacoladora.com",asesorRepository.findByNombreContaining("Ricardo").get(0)));
 
-			horarioRepository.save(new Horario(Long.valueOf(0),"Lunes",LocalTime.parse("09:00:00"),LocalTime.parse("10:00:00"),asesorRepository.findByNombreContaining("Ricardo").get(0)));
-			horarioRepository.save(new Horario(Long.valueOf(0),"Martes",LocalTime.parse("07:00:00"),LocalTime.parse("10:00:00"),asesorRepository.findByNombreContaining("Uriel").get(0)));
-			horarioRepository.save(new Horario(Long.valueOf(0),"Miercoles",LocalTime.parse("10:00:00"),LocalTime.parse("13:00:00"),asesorRepository.findByNombreContaining("Jhon").get(0)));
-			horarioRepository.save(new Horario(Long.valueOf(0),"Jueves",LocalTime.parse("10:00:00"),LocalTime.parse("13:00:00"),asesorRepository.findByNombreContaining("Uriel").get(0)));
+			List<LocalTime> horasInicio = Arrays.asList(LocalTime.parse("09:00:00"));
+			List<LocalTime> horasFin = Arrays.asList(LocalTime.parse("10:00:00"));
+			//horarioRepository.save(new Horario(Long.valueOf(0),"Lunes",horasInicio,horasFin,asesorRepository.findByNombreContaining("Ricardo").get(0)));
+			//horarioRepository.save(new Horario(Long.valueOf(0),"Martes",horasInicio,horasFin,asesorRepository.findByNombreContaining("Uriel").get(0)));
+			//horarioRepository.save(new Horario(Long.valueOf(0),"Miercoles",horasInicio,horasFin,asesorRepository.findByNombreContaining("Jhon").get(0)));
+			//horarioRepository.save(new Horario(Long.valueOf(0),"Jueves",horasInicio,horasFin,asesorRepository.findByNombreContaining("Uriel").get(0)));
 
 			SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
-			asesoriaRepository.save(new Asesoria(Long.valueOf(0),dateFormat.parse("2024-10-24"),12.50,dateFormat.parse("2024-10-26"),3,3,AsesoriaEstado.REALIZADA,LocalTime.parse("10:00:00"),LocalTime.parse("11:00:00"),1,12.50,alumnoRepository.findByNombreContaining("Uriel").get(0),asesorRepository.findByNombreContaining("Ricardo").get(0),cursoRepository.findByNombreContaining("matematica").get(0)));
-			asesoriaRepository.save(new Asesoria(Long.valueOf(0),dateFormat.parse("2024-10-23"),12.50,dateFormat.parse("2024-10-25"),4,2,AsesoriaEstado.CANCELADA,LocalTime.parse("10:00:00"),LocalTime.parse("11:00:00"),1,12.50,alumnoRepository.findByNombreContaining("Jhon").get(0),asesorRepository.findByNombreContaining("Uriel").get(0),cursoRepository.findByNombreContaining("lengua").get(0)));
-			asesoriaRepository.save(new Asesoria(Long.valueOf(0),dateFormat.parse("2024-10-22"),12.50,dateFormat.parse("2024-10-28"),5,3,AsesoriaEstado.RESERVADA,LocalTime.parse("10:00:00"),LocalTime.parse("11:00:00"),1,12.50,alumnoRepository.findByNombreContaining("Uriel").get(0),asesorRepository.findByNombreContaining("Ricardo").get(0),cursoRepository.findByNombreContaining("progra").get(0)));
+			//asesoriaRepository.save(new Asesoria(Long.valueOf(0),dateFormat.parse("2024-10-24"),12.50,dateFormat.parse("2024-10-26"),3,3,AsesoriaEstado.REALIZADA,horasInicio,horasFin,1,12.50,alumnoRepository.findByNombreContaining("Uriel").get(0),asesorRepository.findByNombreContaining("Ricardo").get(0),cursoRepository.findByNombreContaining("matematica").get(0)));
+			//asesoriaRepository.save(new Asesoria(Long.valueOf(0),dateFormat.parse("2024-10-23"),12.50,dateFormat.parse("2024-10-25"),4,2,AsesoriaEstado.CANCELADA,horasInicio,horasFin,1,12.50,alumnoRepository.findByNombreContaining("Jhon").get(0),asesorRepository.findByNombreContaining("Uriel").get(0),cursoRepository.findByNombreContaining("lengua").get(0)));
+			//asesoriaRepository.save(new Asesoria(Long.valueOf(0),dateFormat.parse("2024-10-22"),12.50,dateFormat.parse("2024-10-28"),5,3,AsesoriaEstado.RESERVADA,horasInicio,horasFin,1,12.50,alumnoRepository.findByNombreContaining("Uriel").get(0),asesorRepository.findByNombreContaining("Ricardo").get(0),cursoRepository.findByNombreContaining("progra").get(0)));
 
 			opinionRepository.save(new Opinion(Long.valueOf(0),dateFormat.parse("2024-10-22"),"a bueno",userRepository.findByUserName("Ricardo")));
 			opinionRepository.save(new Opinion(Long.valueOf(0),dateFormat.parse("2024-10-20"),"a malo",userRepository.findByUserName("Uriel")));

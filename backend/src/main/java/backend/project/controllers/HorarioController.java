@@ -55,11 +55,8 @@ public class HorarioController {
         if (horario.getDia()!=null) {
             foundHorario.setDia(horario.getDia());
         }
-        if (horario.getHoraInicio()!=null) {
-            foundHorario.setHoraInicio(horario.getHoraInicio());
-        }
-        if (horario.getHoraFin()!=null) {
-            foundHorario.setHoraFin(horario.getHoraFin());
+        if (horario.getDetalles()!=null) {
+            foundHorario.setDetalles(horario.getDetalles());
         }
         if (horario.getAsesor()!=null) {
             foundHorario.setAsesor(horario.getAsesor());

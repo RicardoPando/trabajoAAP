@@ -79,11 +79,8 @@ public class AsesoriaController {
         if(asesoria.getEstado()!=null){
             founAsesoria.setEstado(asesoria.getEstado());
         }
-        if(asesoria.getHoraInicio()!=null){
-            founAsesoria.setHoraInicio(asesoria.getHoraInicio());
-        }
-        if(asesoria.getHoraFin()!=null){
-            founAsesoria.setHoraFin(asesoria.getHoraFin());
+        if(asesoria.getDetalle()!=null){
+            founAsesoria.setDetalle(asesoria.getDetalle());
         }
         if(asesoria.getDuracion()!=null){
             founAsesoria.setDuracion(asesoria.getDuracion());
