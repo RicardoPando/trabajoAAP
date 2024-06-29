@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AsesorCursoServiceImpl implements AsesorCursoService{
@@ -51,15 +52,11 @@ public class AsesorCursoServiceImpl implements AsesorCursoService{
     }
     @Override
     public List<Asesor> findAsesor_ByCurso_Id(Long id) {
-        List<AsesorCurso> asesorCursos = asesorCursoRepository.findByCurso_Id(id);
-        List<Asesor> asesorList = new ArrayList<>();
-        for (AsesorCurso ac: asesorCursos) {
-            //para romper la bidireccionalidad
-            ac.getAsesor().setAsesorCursos(null);
-            //agrega el asesor a la lista asesorList
-            asesorList.add(ac.getAsesor());
-        }
-        return asesorList;
+
+        return asesorCursoRepository.findByCurso_Id(id).stream()
+                .map(AsesorCurso::getAsesor) // Obtener directamente el Asesor de AsesorCurso
+                .peek(asesor -> asesor.setAsesorCursos(null)) // Romper la relación bidireccional si es necesario
+                .collect(Collectors.toList());
     }
 
     @Override
