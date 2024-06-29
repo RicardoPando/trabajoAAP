@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.List;
 
 @Data
@@ -20,6 +19,7 @@ public class Alumno {
     private Integer ciclo;
     private String nombre;
     private String apellido;
+
     //clase alumno
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)

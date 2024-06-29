@@ -29,7 +29,7 @@ http://localhost:8080/swagger-ui/index.html
             // -- login
             "/api/users/login/**",
             "/api/users/register/**",
-            "/api/**"
+          //  "/api/**"
 
 };
 
@@ -114,25 +114,44 @@ http://localhost:8080/swagger-ui/index.html
 
         http.authorizeHttpRequests( (auth) ->auth
 
-//                .anyRequest().permitAll()
+               .anyRequest().permitAll()
 
-                .antMatchers(AUTH_WHITELIST).permitAll()
+                //.antMatchers(AUTH_WHITELIST).permitAll()
+//
+                //.antMatchers(HttpMethod.POST,"/api/asesor").hasAnyAuthority("ROLE_TEACHER")
+                //.antMatchers(HttpMethod.PUT,"/api/asesor").hasAnyAuthority("ROLE_TEACHER")
+                //.antMatchers(HttpMethod.GET,"/api/asesor/**").hasAnyAuthority("ROLE_TEACHER")
+                //.antMatchers(HttpMethod.POST,"/api/asesoria").hasAnyAuthority("ROLE_TEACHER")
+                //.antMatchers(HttpMethod.GET,"/api/asesoria/**").hasAnyAuthority("ROLE_TEACHER")
+                //.antMatchers(HttpMethod.POST,"/api/asesor_curso").hasAnyAuthority("ROLE_TEACHER")
+                //.antMatchers(HttpMethod.GET,"/api/asesor_curso/**").hasAnyAuthority("ROLE_TEACHER")
+                //.antMatchers(HttpMethod.POST,"/api/curso").hasAnyAuthority("ROLE_TEACHER")
+                //.antMatchers(HttpMethod.GET,"/api/curso/**").hasAnyAuthority("ROLE_TEACHER")
+                //.antMatchers(HttpMethod.POST,"/api/detalleHorario").hasAnyAuthority("ROLE_TEACHER")
+                //.antMatchers(HttpMethod.GET,"/api/detalleHorario/**").hasAnyAuthority("ROLE_TEACHER")
+                //.antMatchers(HttpMethod.POST,"/api/horario").hasAnyAuthority("ROLE_TEACHER")
+                //.antMatchers(HttpMethod.GET,"/api/horario/**").hasAnyAuthority("ROLE_TEACHER")
+//
+//
+                //.antMatchers(HttpMethod.POST,"/api/alumno").hasAnyRole("ROLE_STUDENT", "ADMIN")
+                //.antMatchers(HttpMethod.GET,"/api/alumno/**").hasAnyRole("ROLE_STUDENT", "ADMIN")
+                //.antMatchers(HttpMethod.POST,"/api/asesoria").hasAnyAuthority("ROLE_STUDENT","ADMIN")
+                //.antMatchers(HttpMethod.GET,"/api/asesoria/**").hasAnyAuthority("ROLE_STUDENT","ADMIN")
+                //.antMatchers(HttpMethod.POST,"/api/asesor_curso").hasAnyAuthority("ROLE_STUDENT")
+                //.antMatchers(HttpMethod.GET,"/api/asesor_curso/**").hasAnyAuthority("ROLE_STUDENT")
+                //.antMatchers(HttpMethod.POST,"/api/curso").hasAnyAuthority("ROLE_STUDENT")
+                //.antMatchers(HttpMethod.GET,"/api/curso/**").hasAnyAuthority("ROLE_STUDENT")
+                //.antMatchers(HttpMethod.POST,"/api/detalleHorario").hasAnyAuthority("ROLE_STUDENT")
+                //.antMatchers(HttpMethod.GET,"/api/detalleHorario/**").hasAnyAuthority("ROLE_STUDENT")
+                //.antMatchers(HttpMethod.POST,"/api/horario").hasAnyAuthority("ROLE_STUDENT")
+                //.antMatchers(HttpMethod.GET,"/api/horario/**").hasAnyAuthority("ROLE_STUDENT")
+//
+                //.antMatchers("/api/**").hasAnyAuthority("ROLE_ADMIN","ROLE_STUDENT","ROLE_TEACHER")
 
-                .antMatchers(HttpMethod.GET,"/api/employees/**").hasAnyAuthority("ROLE_STUDENT", "ROLE_ADMIN")
-                //.antMatchers(HttpMethod.GET,"/api/employees").hasAnyRole("STUDENT", "ADMIN")
-
-                .antMatchers("/api/employees/**").hasAnyAuthority("ROLE_ADMIN")
-
-                .anyRequest().authenticated()
+               // .anyRequest().authenticated()
 
         );
-
-
-
         http.sessionManagement( (session)-> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-
-
-
         return http.build();
 
     }

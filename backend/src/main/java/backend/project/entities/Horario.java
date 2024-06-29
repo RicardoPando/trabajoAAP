@@ -5,8 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.sql.Time;
-import java.sql.Timestamp;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -19,8 +19,11 @@ public class Horario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String dia;
-    private Time horaInicio;
-    private Time horaFin;
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "horario")
+    private List<DetalleHorario> detalles;
+
 
     @ManyToOne
     @JoinColumn(name = "asesor_id", nullable = true)

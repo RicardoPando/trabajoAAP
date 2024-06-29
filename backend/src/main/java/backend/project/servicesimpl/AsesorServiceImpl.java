@@ -5,8 +5,6 @@ import backend.project.exceptions.KeyRepeatedDataException;
 import backend.project.exceptions.ResourceNotFoundException;
 
 import backend.project.repositories.AsesorRepository;
-import backend.project.repositories.AsesorRepository;
-import backend.project.entities.Asesor;
 import backend.project.services.AsesorService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +33,18 @@ public class AsesorServiceImpl implements AsesorService {
         }
         return asesorFound;
     }
+
+    @Override
+    public Asesor findByNombreContaining(String nombre) {
+        List<Asesor> asesores = asesorRepository.findByNombreContaining(nombre);
+        if (asesores.isEmpty()) {
+            throw new ResourceNotFoundException("There are no Asesores with the name containing: " + nombre);
+        }
+        // En caso de encontrar múltiples coincidencias por nombre,
+        // puede devolver el primer elemento o manejarlo según su lógica de negocio
+        return asesores.get(0);
+    }
+
     @Override
     public Asesor save(Asesor asesor) {
         if (asesor.getNombre()==null || asesor.getNombre().isEmpty()) {

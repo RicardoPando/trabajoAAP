@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -18,14 +17,13 @@ public class AsesorCurso {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Integer nivelDominio;
-    private Date disponibilidad;
+    private String carrera;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "asesor_id")
     private Asesor asesor;
 
-    @JsonIgnore
+
     @ManyToOne
     @JoinColumn(name = "curso_id")
     private Curso curso;

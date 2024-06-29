@@ -7,7 +7,6 @@ public enum AuthorityName {
     ROLE_ADMIN,
     ROLE_STUDENT,
     ROLE_PRINCIPAL,
-
     ROLE_TEACHER
 
 }

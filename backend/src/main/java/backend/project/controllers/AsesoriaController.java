@@ -35,7 +35,7 @@ public class AsesoriaController {
     //listar asesoria por id alumno
     @GetMapping("/asesoria/alumno/{id_alumno}")
     public ResponseEntity<List<Asesoria>> getAsesoriaByAlumno_Id(@PathVariable("id_alumno") Long id) {
-        List<Asesoria> asesoriaList = asesoriaService.findByAsesor_Id(id);
+        List<Asesoria> asesoriaList = asesoriaService.findByAlumno_Id(id);
         return new ResponseEntity<List<Asesoria>>(asesoriaList, HttpStatus.OK);
     }
     //listar asesoria por id curso
@@ -79,11 +79,8 @@ public class AsesoriaController {
         if(asesoria.getEstado()!=null){
             founAsesoria.setEstado(asesoria.getEstado());
         }
-        if(asesoria.getHoraInicio()!=null){
-            founAsesoria.setHoraInicio(asesoria.getHoraInicio());
-        }
-        if(asesoria.getHoraFin()!=null){
-            founAsesoria.setHoraFin(asesoria.getHoraFin());
+        if(asesoria.getDetalle()!=null){
+            founAsesoria.setDetalle(asesoria.getDetalle());
         }
         if(asesoria.getDuracion()!=null){
             founAsesoria.setDuracion(asesoria.getDuracion());

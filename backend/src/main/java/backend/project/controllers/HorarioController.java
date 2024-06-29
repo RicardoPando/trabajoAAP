@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalTime;
 import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -28,6 +29,12 @@ public class HorarioController {
         Horario horario = horarioService.findById(id);
         return new ResponseEntity<Horario>(horario, HttpStatus.OK);
     }
+    //listar por id de asesor
+    @GetMapping("/horario/asesor/{id}")
+    public ResponseEntity<List<Horario>> getHorariosPorAsesorId(@PathVariable("id") Long id) {
+        List<Horario> horario = horarioService.findByAsesorId(id);
+        return new ResponseEntity<List<Horario>>(horario, HttpStatus.OK);
+    }
     //crear
     @PostMapping("/horario")
     public ResponseEntity<Horario> createHorario(@RequestBody Horario horario) {
@@ -48,11 +55,8 @@ public class HorarioController {
         if (horario.getDia()!=null) {
             foundHorario.setDia(horario.getDia());
         }
-        if (horario.getHoraInicio()!=null) {
-            foundHorario.setHoraInicio(horario.getHoraInicio());
-        }
-        if (horario.getHoraFin()!=null) {
-            foundHorario.setHoraFin(horario.getHoraFin());
+        if (horario.getDetalles()!=null) {
+            foundHorario.setDetalles(horario.getDetalles());
         }
         if (horario.getAsesor()!=null) {
             foundHorario.setAsesor(horario.getAsesor());
