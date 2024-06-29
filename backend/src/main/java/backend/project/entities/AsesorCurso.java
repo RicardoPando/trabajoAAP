@@ -17,8 +17,7 @@ public class AsesorCurso {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Integer nivelDominio;
-    //private Date disponibilidad;
-
+    private String carrera;
 
     @ManyToOne
     @JoinColumn(name = "asesor_id")

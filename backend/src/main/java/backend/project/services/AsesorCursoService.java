@@ -11,6 +11,8 @@ public interface AsesorCursoService {
     public List<AsesorCurso> findByCurso_Id(Long id);
     public List<Asesor>  findAsesor_ByCurso_Id(Long id);
     public List<Curso>  findCurso_ByAsesor_Id(Long id);
+    public List<Curso> findCursosByCarrera(String carrera);
+    public List<AsesorCurso> findAsesorCursoByCarrera(String carrera);
     public AsesorCurso findById(Long id);
     public AsesorCurso save(AsesorCurso asesorCurso);
     public void delete(Long id);

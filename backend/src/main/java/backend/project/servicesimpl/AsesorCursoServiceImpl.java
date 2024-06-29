@@ -76,6 +76,16 @@ public class AsesorCursoServiceImpl implements AsesorCursoService{
     }
 
     @Override
+    public List<Curso> findCursosByCarrera(String carrera) {
+        return asesorCursoRepository.findCursosByCarrera(carrera);
+    }
+
+    @Override
+    public List<AsesorCurso> findAsesorCursoByCarrera(String carrera) {
+        return asesorCursoRepository.findAllByCarrera(carrera);
+    }
+
+    @Override
     public AsesorCurso findById(Long id) {
         AsesorCurso asesorCursoFound = asesorCursoRepository.findById(id).orElse(null);
         if (asesorCursoFound == null) {
