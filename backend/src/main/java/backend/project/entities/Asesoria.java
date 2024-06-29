@@ -1,5 +1,6 @@
 package backend.project.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import javax.persistence.*;
 import java.sql.Time;
 import java.time.LocalTime;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -25,8 +27,12 @@ public class Asesoria {
     private Integer calificacionAsesor;
     private Integer calificacionAlumno;
     private AsesoriaEstado estado;
-    private LocalTime horaInicio;
-    private LocalTime horaFin;
+
+
+    @ManyToOne
+    @JoinColumn(name = "detalle_id", nullable = true)
+    private DetalleHorario detalle;
+
     private Integer duracion;
     private Double montoCobrado;
 

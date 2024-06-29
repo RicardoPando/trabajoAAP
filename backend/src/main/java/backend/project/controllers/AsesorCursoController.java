@@ -53,6 +53,18 @@ public class AsesorCursoController {
         List<Asesor> asesorList = asesorCursoService.findAsesor_ByCurso_Id(id);
         return new ResponseEntity<List<Asesor>>(asesorList, HttpStatus.OK);
     }
+    //Listar cursos por carrera
+    @GetMapping("/asesor_curso/curso/carrera/{carrera}")
+    public ResponseEntity<List<Curso>> getCursosByCarrera(@PathVariable("carrera") String carrera) {
+        List<Curso> cursoList = asesorCursoService.findCursosByCarrera(carrera);
+        return new ResponseEntity<List<Curso>>(cursoList, HttpStatus.OK);
+    }
+    //Listar asesor-cursos por carrera
+    @GetMapping("/asesor_curso/asesorCurso/carrera/{carrera}")
+    public ResponseEntity<List<AsesorCurso>> getAsesorCursoByCarrera(@PathVariable("carrera") String carrera) {
+        List<AsesorCurso> asesorCursoList = asesorCursoService.findAsesorCursoByCarrera(carrera);
+        return new ResponseEntity<List<AsesorCurso>>(asesorCursoList, HttpStatus.OK);
+    }
     //create
     @PostMapping("/asesor_curso")
     public ResponseEntity<AsesorCurso> createAsesorCurso(@RequestBody AsesorCurso asesorCurso) {
