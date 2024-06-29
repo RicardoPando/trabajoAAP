@@ -61,67 +61,67 @@ public class BackendApplication {
 			);
 
 
-			userRepository.save(
-					new User("gmorip", new BCryptPasswordEncoder().encode("UPC2023!"),true,new Date(),
-							List.of(
-									authorityRepository.findByName(AuthorityName.ROLE_PRINCIPAL),
-									authorityRepository.findByName(AuthorityName.ROLE_ADMIN),
-									authorityRepository.findByName(AuthorityName.WRITE)
-								)
-							)
-			);
+			//userRepository.save(
+			//		new User("gmorip", new BCryptPasswordEncoder().encode("UPC2023!"),true,new Date(),
+			//				List.of(
+			//						authorityRepository.findByName(AuthorityName.ROLE_PRINCIPAL),
+			//						authorityRepository.findByName(AuthorityName.ROLE_ADMIN),
+			//						authorityRepository.findByName(AuthorityName.WRITE)
+			//					)
+			//				)
+			//);
+//
+			//userRepository.save(
+			//		new User("crevilla", new BCryptPasswordEncoder().encode("DISEÑOPERU18!"),true,new Date(),
+			//				List.of(
+			//						authorityRepository.findByName(AuthorityName.ROLE_STUDENT),
+			//						authorityRepository.findByName(AuthorityName.READ),
+			//						authorityRepository.findByName(AuthorityName.WRITE)
+//
+			//				)
+			//		)
+			//);
+//
+			//userRepository.save(
+			//		new User("uriel123", new BCryptPasswordEncoder().encode("lerma123"),true,new Date(),
+			//				List.of(
+			//						authorityRepository.findByName(AuthorityName.ROLE_STUDENT),
+			//						authorityRepository.findByName(AuthorityName.ROLE_TEACHER),
+			//						authorityRepository.findByName(AuthorityName.READ),
+			//						authorityRepository.findByName(AuthorityName.WRITE)
+			//				)
+			//		)
+			//);
+//
+			//userRepository.save(
+			//		new User("rycon", new BCryptPasswordEncoder().encode("armando200"),true,new Date(),
+			//				List.of(
+			//						authorityRepository.findByName(AuthorityName.ROLE_STUDENT),
+			//						authorityRepository.findByName(AuthorityName.ROLE_TEACHER),
+			//						authorityRepository.findByName(AuthorityName.READ),
+			//						authorityRepository.findByName(AuthorityName.WRITE)
+			//				)
+			//		)
+			//);
 
-			userRepository.save(
-					new User("crevilla", new BCryptPasswordEncoder().encode("DISEÑOPERU18!"),true,new Date(),
-							List.of(
-									authorityRepository.findByName(AuthorityName.ROLE_STUDENT),
-									authorityRepository.findByName(AuthorityName.READ),
-									authorityRepository.findByName(AuthorityName.WRITE)
-
-							)
-					)
-			);
-
-			userRepository.save(
-					new User("uriel123", new BCryptPasswordEncoder().encode("lerma123"),true,new Date(),
-							List.of(
-									authorityRepository.findByName(AuthorityName.ROLE_STUDENT),
-									authorityRepository.findByName(AuthorityName.ROLE_TEACHER),
-									authorityRepository.findByName(AuthorityName.READ),
-									authorityRepository.findByName(AuthorityName.WRITE)
-							)
-					)
-			);
-
-			userRepository.save(
-					new User("rycon", new BCryptPasswordEncoder().encode("armando200"),true,new Date(),
-							List.of(
-									authorityRepository.findByName(AuthorityName.ROLE_STUDENT),
-									authorityRepository.findByName(AuthorityName.ROLE_TEACHER),
-									authorityRepository.findByName(AuthorityName.READ),
-									authorityRepository.findByName(AuthorityName.WRITE)
-							)
-					)
-			);
 
 
+			//alumnoRepository.save( new Alumno(Long.valueOf(0),5,"Ricardo","Pando", userRepository.findByUserName("rycon"),null,null));
+			//alumnoRepository.save( new Alumno(Long.valueOf(0),8,"Uriel","Parra", userRepository.findByUserName("uriel123"),null,null));
+			//alumnoRepository.save( new Alumno(Long.valueOf(0),3,"Jhon","Salchi", userRepository.findByUserName("crevilla"),null,null));
 
-			alumnoRepository.save( new Alumno(Long.valueOf(0),5,"Ricardo","Pando", userRepository.findByUserName("rycon"),null,null));
-			alumnoRepository.save( new Alumno(Long.valueOf(0),8,"Uriel","Parra", userRepository.findByUserName("uriel123"),null,null));
-			alumnoRepository.save( new Alumno(Long.valueOf(0),3,"Jhon","Salchi", userRepository.findByUserName("crevilla"),null,null));
+			//asesorRepository.save(new Asesor(Long.valueOf(0),"Ricardo","Pando",40,"Mucha",userRepository.findByUserName("rycon"),null,null,null,null));
+			//asesorRepository.save(new Asesor(Long.valueOf(0),"Uriel","Parra",13,"Poca",userRepository.findByUserName("uriel123"),null,null,null,null));
+			//asesorRepository.save(new Asesor(Long.valueOf(0),"Jhon","Salchi",20,"Algo",userRepository.findByUserName("crevilla"),null,null,null,null));
 
-			asesorRepository.save(new Asesor(Long.valueOf(0),"Ricardo","Pando",40,"Mucha",userRepository.findByUserName("rycon"),null,null,null,null));
-			asesorRepository.save(new Asesor(Long.valueOf(0),"Uriel","Parra",13,"Poca",userRepository.findByUserName("uriel123"),null,null,null,null));
-			asesorRepository.save(new Asesor(Long.valueOf(0),"Jhon","Salchi",20,"Algo",userRepository.findByUserName("crevilla"),null,null,null,null));
+			//cursoRepository.save(new Curso(Long.valueOf(0),"matematica",5,null,null,null));
+			//cursoRepository.save(new Curso(Long.valueOf(0),"lengua",3,null,null,null));
+			//cursoRepository.save(new Curso(Long.valueOf(0),"fisica",1,null,null,null));
+			//cursoRepository.save(new Curso(Long.valueOf(0),"progra",2,null,null,null));
 
-			cursoRepository.save(new Curso(Long.valueOf(0),"matematica",5,null,null,null));
-			cursoRepository.save(new Curso(Long.valueOf(0),"lengua",3,null,null,null));
-			cursoRepository.save(new Curso(Long.valueOf(0),"fisica",1,null,null,null));
-			cursoRepository.save(new Curso(Long.valueOf(0),"progra",2,null,null,null));
-
-			canalContactoRepository.save(new CanalContacto(Long.valueOf(0),"999784561","prefomasna@upc.edu.pe","https://pe.linkedin.com/in/urielito","www.kick.com",asesorRepository.findByNombreContaining("Uriel").get(0)));
-			canalContactoRepository.save(new CanalContacto(Long.valueOf(0),"915961599","masnaprof@upc.edu.pe","https://pe.linkedin.com/in/fqwfqwfqqq","www.patada.com",asesorRepository.findByNombreContaining("Jhon").get(0)));
-			canalContactoRepository.save(new CanalContacto(Long.valueOf(0),"989595489","mostro@upc.edu.pe","https://pe.linkedin.com/in/paginaxd","www.patadacoladora.com",asesorRepository.findByNombreContaining("Ricardo").get(0)));
+			//canalContactoRepository.save(new CanalContacto(Long.valueOf(0),"999784561","prefomasna@upc.edu.pe","https://pe.linkedin.com/in/urielito","www.kick.com",asesorRepository.findByNombreContaining("Uriel").get(0)));
+			//canalContactoRepository.save(new CanalContacto(Long.valueOf(0),"915961599","masnaprof@upc.edu.pe","https://pe.linkedin.com/in/fqwfqwfqqq","www.patada.com",asesorRepository.findByNombreContaining("Jhon").get(0)));
+			//canalContactoRepository.save(new CanalContacto(Long.valueOf(0),"989595489","mostro@upc.edu.pe","https://pe.linkedin.com/in/paginaxd","www.patadacoladora.com",asesorRepository.findByNombreContaining("Ricardo").get(0)));
 
 			List<LocalTime> horasInicio = Arrays.asList(LocalTime.parse("09:00:00"));
 			List<LocalTime> horasFin = Arrays.asList(LocalTime.parse("10:00:00"));
@@ -135,9 +135,9 @@ public class BackendApplication {
 			//asesoriaRepository.save(new Asesoria(Long.valueOf(0),dateFormat.parse("2024-10-23"),12.50,dateFormat.parse("2024-10-25"),4,2,AsesoriaEstado.CANCELADA,horasInicio,horasFin,1,12.50,alumnoRepository.findByNombreContaining("Jhon").get(0),asesorRepository.findByNombreContaining("Uriel").get(0),cursoRepository.findByNombreContaining("lengua").get(0)));
 			//asesoriaRepository.save(new Asesoria(Long.valueOf(0),dateFormat.parse("2024-10-22"),12.50,dateFormat.parse("2024-10-28"),5,3,AsesoriaEstado.RESERVADA,horasInicio,horasFin,1,12.50,alumnoRepository.findByNombreContaining("Uriel").get(0),asesorRepository.findByNombreContaining("Ricardo").get(0),cursoRepository.findByNombreContaining("progra").get(0)));
 
-			opinionRepository.save(new Opinion(Long.valueOf(0),dateFormat.parse("2024-10-22"),"a bueno",userRepository.findByUserName("Ricardo")));
-			opinionRepository.save(new Opinion(Long.valueOf(0),dateFormat.parse("2024-10-20"),"a malo",userRepository.findByUserName("Uriel")));
-			opinionRepository.save(new Opinion(Long.valueOf(0),dateFormat.parse("2024-10-19"),"mas o menos",userRepository.findByUserName("Jhon")));
+			//opinionRepository.save(new Opinion(Long.valueOf(0),dateFormat.parse("2024-10-22"),"a bueno",userRepository.findByUserName("Ricardo")));
+			//opinionRepository.save(new Opinion(Long.valueOf(0),dateFormat.parse("2024-10-20"),"a malo",userRepository.findByUserName("Uriel")));
+			//opinionRepository.save(new Opinion(Long.valueOf(0),dateFormat.parse("2024-10-19"),"mas o menos",userRepository.findByUserName("Jhon")));
 
 
 
